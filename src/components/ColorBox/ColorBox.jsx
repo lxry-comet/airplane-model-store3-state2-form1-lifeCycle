@@ -38,14 +38,28 @@ export class ColorBox extends Component {
 // * 3 При будь яких змінах властивості selectedButtonIdx, записуємо selectedButtonIdx у LocalStorage
 
 	componentDidUpdate(prevProps, prevState) {
-		console.log('Спрацював componentDidUpdate');
+		console.log('⚡Спрацював componentDidUpdate');
 
         if (prevState.selectedButtonsIdx !== this.state.selectedButtonsIdx) {
+					console.log("🔸🔸Зміна state, selectedButtonIdx")
             localStorage.setItem(
                 "selectedIdx",
                 JSON.stringify(this.state.selectedButtonsIdx)
             );
         }
+				
+				//todo: 1.Перевірка оновлення компонента у звичайному методі класу componentDidUpdate:
+        const prevActiveButtonIdx = prevState.activeButtonIndex;
+        const nextActiveButtonIdx = this.state.activeButtonIndex;
+
+        console.log("🔙prevActiveButtonIdx:", prevActiveButtonIdx);
+        console.log("🔜nextActiveButtonIdx:", nextActiveButtonIdx);
+
+        if (prevActiveButtonIdx !== nextActiveButtonIdx) {
+            console.log("❗️⭕️❗️Оновлено поле 'state.activeButtonIndex'");
+            //todo: Оновлення localStorage "activeButtonIndex":
+            localStorage.setItem("activeButtonIndex", JSON.stringify(nextActiveButtonIdx));
+        };
     };
 
 	//! Для створення масиву selectedColors[] нам потрібно: вхідний масив, масив індексів активних(обраних) елементів.
