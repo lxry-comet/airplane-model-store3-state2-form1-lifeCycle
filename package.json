@@ -1,12 +1,12 @@
 {
-  "name": "airplane-model-store3-state2",
-  "homepage": "https://lxry-comet.github.io/airplane-model-store3-state2/",
+  "name": "airplane-model-store3-state2-form1-lifeCycle",
+  "homepage": "https://lxry-comet.github.io/airplane-model-store3-state2-form1-lifeCycle/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --base=/airplane-model-store3-state2/",
+    "build": "vite build --base=/airplane-model-store3-state2-form1-lifeCycle/",
     "lint": "eslint .",
     "preview": "vite preview"
   },
