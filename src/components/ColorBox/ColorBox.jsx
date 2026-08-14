@@ -13,7 +13,7 @@ export class ColorBox extends Component {
 // ? Логіка роботи з LocalStorage: 
 
 	state = {
-		// activeButtonIndex: null, //! індекс обраного елемента
+		activeButtonIndex: null, //! індекс обраного елемента
 		// selectedButtonsIdx: [], //! масив індексів активних(обраних) елементів
 
 		
@@ -99,7 +99,7 @@ export class ColorBox extends Component {
 				
 					//? Створюємо новий масив, у який копіюємо всі елементи зі старого масиву та додаємо до них новий елемент
 				this.setState({
-					// activeButtonIndex: index,
+					 activeButtonIndex: index,
         	selectedButtonsIdx: this.state.selectedButtonsIdx.concat(index).sort((a, b) => a - b)
 				})
 			}
@@ -127,7 +127,7 @@ export class ColorBox extends Component {
 
 		const {colorBoxes} = this.props;
 		const {
-			// activeButtonIndex, 
+			activeButtonIndex, 
 			selectedButtonsIdx, 
 			// selectedColors
 		} = this.state;
@@ -160,7 +160,7 @@ export class ColorBox extends Component {
 				<h3 className={css.colorBoxTitle}>Вибір Кольорів</h3>
 
 				<p className={css.colorBoxDescription}>Остнній доданий колір: &nbsp;
-					{/* <span
+					<span
 					 className={css.colorBoxSelectedColor}
 					 style={{backgroundColor:
 						activeButtonIndex === null 
@@ -173,7 +173,7 @@ export class ColorBox extends Component {
 						? 'Колір не обрано' 
 						:colorBoxes[activeButtonIndex].label
 						}
-						</span> */}
+						</span>
 				</p>
 					
 				<div className={css.colorBox}>
