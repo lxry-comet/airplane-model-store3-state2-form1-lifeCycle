@@ -33,6 +33,15 @@ export class ColorBox extends Component {
         if (!saved) {
             localStorage.setItem("selectedIdx", JSON.stringify([]));
         }
+				//? didMount має перезаписати значення activeButtonIdx з localStorage в стейт activeButtnIndex
+				//todo: Оновлення state "activeButtonIdx" при наявності значень в localStorage "activeButtonIdx" за допомогою  componentDidMount
+				const activeButtonIdx = localStorage.getItem("activeButtonIndex")
+				console.log("🔸🔸🔸activeButtonIdx: ",activeButtonIdx)
+				const activeButtonIdxParse = JSON.parse(activeButtonIdx)
+				console.log("⚡⚡🔸activeButtonIdxParse: ",activeButtonIdxParse)
+				this.setState({
+					activeButtonIndex: activeButtonIdxParse
+				})
     };
 
 // * 3 При будь яких змінах властивості selectedButtonIdx, записуємо selectedButtonIdx у LocalStorage
