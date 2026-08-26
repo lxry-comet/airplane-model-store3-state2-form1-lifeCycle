@@ -28,17 +28,21 @@ export class Modal extends Component {
 
     const {
       // title, 
-      children
+      children,
+      showModal
     }=this.props
+
     // console.log('Title: ', title)
     console.log('Title: ', children)
+    console.log('showModal: ', showModal)
 
-    return (  
+    return ( 
+       
       <div className={css.modalBackdrop}>
-        {/* <div className={css.modalContent} ><h1>Це контент модалки -1 </h1></div> */}
-        <div className={css.modalContent} >
-          {children}
-          </div>
+        {/* <div className={css.modalContent} ><h1>Це контент модалки -1 </h1></div> */}    
+            <div className={css.modalContent} >
+              {children}
+            </div> 
       </div>
     );
   };
