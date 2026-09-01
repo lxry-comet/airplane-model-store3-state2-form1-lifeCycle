@@ -12,17 +12,25 @@ const modalRoot =
  document.querySelector('#modal-root');
 
 export class Modal extends Component {
+
+  
+
   componentDidMount() {
+
     console.log('1️⃣❗️❗️.Modal componentDidMount');
 
-    //!: ❌ Для закриття модаки клавішею ESC -
-    window.addEventListener('keydown', event => {
-        console.log("event.code:", event.code);
-        if (event.code === 'Escape') {
-          console.log("Натиснули ❌ESC, потрібно закрити модалку");
-          this.props.onClose();
-        };
-    });
+    //!: ❌ Для закриття модаки клавішею ESC - - так НЕ буде працювати з StrictMode!!!
+
+    // window.addEventListener('keydown', event => {
+    //     console.log("event.code:", event.code);
+    //     if (event.code === 'Escape') {
+    //       console.log("Натиснули ❌ESC, потрібно закрити модалку");
+    //       this.props.onClose();
+    //     };
+    // });
+
+    //* ✅ Для закриття модаки клавішею ESC - так БУДЕ працювати з StrictMode!!!
+    window.addEventListener('keydown', this.handleKeyDownESC);
   };
 
   
@@ -33,8 +41,17 @@ export class Modal extends Component {
 
   componentWillUnmount() {
     console.log('3️⃣❗️❗️.Modal componentWillUnmount');
+    window.removeEventListener('keydown', this.handleKeyDownESC);
   };
 
+  //! Для закриття модаки клавішею ESC 
+  handleKeyDownESC = event => {
+    console.log("event.code:", event.code); //!
+    if (event.code === 'Escape') {
+      console.log("Натиснули ❌ESC, потрібно закрити модалку");
+      this.props.onClose();
+    };
+  };
 
   render() {
     console.log("0️⃣❗️❗️.Modal render");
