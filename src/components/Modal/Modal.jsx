@@ -4,8 +4,12 @@
 //! 3.3.Слухач на клік по Backdrop
 
 import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
+
 import css from "./Modal.module.css";
 
+const modalRoot =   
+ document.querySelector('#modal-root');
 
 export class Modal extends Component {
   componentDidMount() {
@@ -36,14 +40,20 @@ export class Modal extends Component {
     console.log('Title: ', children)
     console.log('showModal: ', showModal)
 
-    return ( 
+    // return ( 
        
-      <div className={css.modalBackdrop}>
-        {/* <div className={css.modalContent} ><h1>Це контент модалки -1 </h1></div> */}    
-            <div className={css.modalContent} >
-              {children}
-            </div> 
-      </div>
+    //   <div className={css.modalBackdrop}>
+    //     {/* <div className={css.modalContent} ><h1>Це контент модалки -1 </h1></div> */}    
+    //         <div className={css.modalContent} >
+    //           {children}
+    //         </div> 
+    //   </div>
+    // );
+  return createPortal(  
+      <div className={css.modalBackdrop} >
+        <div className={css.modalContent} >{children}</div>
+      </div>,
+      modalRoot,
     );
   };
 };

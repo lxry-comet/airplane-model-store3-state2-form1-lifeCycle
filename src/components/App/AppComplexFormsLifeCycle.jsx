@@ -6,8 +6,23 @@ import { ComplexFormsGenerationID } from '@/components/ComplexFormsGenerationID/
 import { ComplexFormsGenerationIDRadioButton } from '@/components/ComplexFormsGenerationIDRadioButton/ComplexFormsGenerationIDRadioButton.jsx'
 import { ComplexFormsGenerationIDRadioButtonCheckboxesSelect } from '@/components/ComplexFormsGenerationIDRadioButtonCheckboxesSelect/ComplexFormsGenerationIDRadioButtonCheckboxesSelect.jsx'
 import { Modal } from '@/components/Modal/Modal.jsx'
+import {ColorBoxLifeCycle} from '@/components/ColorBoxLifeCycle/ColorBoxLifeCycle.jsx'
+
+
+const colorBoxOptions = [
+  { label: 'red', color: '#ff0000' },
+  { label: 'orange', color: '#ffa500' },
+  { label: 'yellow', color: '#ffff00' },
+  { label: 'green', color: '#008000' },
+  { label: 'lightblue', color: '#add8e6' },
+  { label: 'blue', color: '#3131ff' },
+  { label: 'violet', color: '#ee82ee' },
+];
+
+
 
 export class AppComplexFormsLifeCycle extends Component {
+
 	state = {
 		showModal: false //! контроль відкриття/закриття модального вікна
 	}
@@ -62,6 +77,7 @@ export class AppComplexFormsLifeCycle extends Component {
 						</button>
 					</Modal>
 				)}
+				<ColorBoxLifeCycle colorBoxes={colorBoxOptions}/>
 			</>
 		)
 	}
