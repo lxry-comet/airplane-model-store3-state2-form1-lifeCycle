@@ -12,23 +12,35 @@ export class AppComplexFormsLifeCycle extends Component {
 		showModal: false //! контроль відкриття/закриття модального вікна
 	}
 	//? showModal:false -> showModal:true
-	openModal=()=>{
-		console.log("🌀toggleModal: ");
-		this.setState({
-			showModal: true
-		})
-	}
-	closeModal=()=>{
-		console.log("🌀toggleModal: ");
-		this.setState({
-			showModal: false
-		})
-	}
+	// toggleModal=()=>{
+	// 	console.log("🌀toggleModal: ");
+	// 	this.setState({
+	// 		showModal: true
+	// 	})
+	// }
+	// toggleModal=()=>{
+	// 	console.log("🌀toggleModal: ");
+	// 	this.setState({
+	// 		showModal: false
+	// 	})
+	// }
+	// toggleModal = () => { //? без деструктурізації
+  //   this.setState(prevState => ({
+  //     showModal: !prevState.showModal
+  //   }));
+  // };
+	toggleModal = () => { //? з деструктурізацією
+    console.log("🌀toggleModal");
+    this.setState(({ showModal }) => ({
+      showModal: !showModal
+    }));
+  };
+
 	render() {
 		const { showModal } = this.state
 		return (
 			<>
-				<button type='button' onClick={this.openModal}>
+				<button type='button' onClick={this.toggleModal}>
 					Відкрити модалку
 					</button>
 
@@ -45,7 +57,7 @@ export class AppComplexFormsLifeCycle extends Component {
 							eum deserunt ullam maxime architecto, iure voluptatum, ipsum
 							laudantium recusandae reprehenderit corrupti. Molestias?
 						</p>
-						<button type='button' onClick={this.closeModal}>
+						<button type='button' onClick={this.toggleModal}>
 							Закрити модалку
 						</button>
 					</Modal>
