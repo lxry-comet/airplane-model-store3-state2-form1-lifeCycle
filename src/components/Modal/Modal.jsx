@@ -14,6 +14,15 @@ const modalRoot =
 export class Modal extends Component {
   componentDidMount() {
     console.log('1️⃣❗️❗️.Modal componentDidMount');
+
+    //!: ❌ Для закриття модаки клавішею ESC -
+    window.addEventListener('keydown', event => {
+        console.log("event.code:", event.code);
+        if (event.code === 'Escape') {
+          console.log("Натиснули ❌ESC, потрібно закрити модалку");
+          this.props.onClose();
+        };
+    });
   };
 
   
@@ -33,12 +42,12 @@ export class Modal extends Component {
     const {
       // title, 
       children,
-      showModal
+      onClose
     }=this.props
 
     // console.log('Title: ', title)
-    console.log('Title: ', children)
-    console.log('showModal: ', showModal)
+    console.log('Children: ', children)
+    // console.log('showModal: ', showModal)
 
     // return ( 
        

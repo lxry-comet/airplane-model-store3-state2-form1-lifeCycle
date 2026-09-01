@@ -63,7 +63,7 @@ export class AppComplexFormsLifeCycle extends Component {
 				{showModal && (
 					<Modal
 						// title='Це контент модалки-2'
-						showModal={showModal}
+						onClose={this.toggleModal}
 					>
 						<h1>Це контент модалки як children</h1>
 						<p>
@@ -77,7 +77,7 @@ export class AppComplexFormsLifeCycle extends Component {
 						</button>
 					</Modal>
 				)}
-				<ColorBoxLifeCycle colorBoxes={colorBoxOptions}/>
+				{/* <ColorBoxLifeCycle colorBoxes={colorBoxOptions}/> */}
 			</>
 		)
 	}
