@@ -52,7 +52,16 @@ export class Modal extends Component {
       this.props.onClose();
     };
   };
-
+  handleBackdropClick = event =>{
+    //! Властивості event.target​ та event.currentTarget
+    // console.log("event.target: ", event.target);
+    // console.log("event.currentTarget: ", event.currentTarget);
+    if(event.target === event.currentTarget){
+      console.log("Клікнули в бекдроп")
+      this.props.onClose();
+    }
+    
+  }
   render() {
     console.log("0️⃣❗️❗️.Modal render");
 
@@ -76,7 +85,7 @@ export class Modal extends Component {
     //   </div>
     // );
   return createPortal(  
-      <div className={css.modalBackdrop} >
+      <div className={css.modalBackdrop} onClick={this.handleBackdropClick}>
         <div className={css.modalContent} >{children}</div>
       </div>,
       modalRoot,
