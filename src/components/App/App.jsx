@@ -22,7 +22,7 @@ import {ScaleSelection} from '@/components/ScaleSelection/ScaleSelection.jsx'
 import css from './App.module.css'
 import { id } from 'date-fns/locale'
 import { CgOpenCollective } from 'react-icons/cg'
-
+import {RegistrationIdentification}  from "@/components/RegistrationIdentification/RegistrationIdentification.jsx"
 import debounce from 'lodash.debounce'
 
 //! Приклад початкового сортування на ім'я (за полем name.brief)
@@ -515,6 +515,11 @@ export class App extends Component {
 		console.log("🔸🔸🔸modelsSelectedScale: ", modelsSelectedScale)
 		return (
 			<>
+			{/*//!  Реєстрація та Ідентифікація/Аутентифікація (Login) користувача */}
+        <RegistrationIdentification
+          onClose={this.toggleModal} //! відкриття/
+        />
+
 				<ScaleSelection
 					aircrafts={aircrafts}
 					onGetModelsSelectedScale={this.getModelsSelectedScale}
