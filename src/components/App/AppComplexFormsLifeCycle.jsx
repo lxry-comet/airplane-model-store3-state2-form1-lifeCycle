@@ -7,7 +7,7 @@ import { ComplexFormsGenerationIDRadioButton } from '@/components/ComplexFormsGe
 import { ComplexFormsGenerationIDRadioButtonCheckboxesSelect } from '@/components/ComplexFormsGenerationIDRadioButtonCheckboxesSelect/ComplexFormsGenerationIDRadioButtonCheckboxesSelect.jsx'
 import { Modal } from '@/components/Modal/Modal.jsx'
 import {ColorBoxLifeCycle} from '@/components/ColorBoxLifeCycle/ColorBoxLifeCycle.jsx'
-
+import {Clock} from '@/components/Clock/Clock.jsx'
 
 const colorBoxOptions = [
   { label: 'red', color: '#ff0000' },
@@ -26,6 +26,10 @@ export class AppComplexFormsLifeCycle extends Component {
 	state = {
 		showModal: false //! контроль відкриття/закриття модального вікна
 	}
+
+
+
+
 	//? showModal:false -> showModal:true
 	// toggleModal=()=>{
 	// 	console.log("🌀toggleModal: ");
@@ -55,12 +59,12 @@ export class AppComplexFormsLifeCycle extends Component {
 		const { showModal } = this.state
 		return (
 			<>
-				<button type='button' onClick={this.toggleModal}>
+				{/* <button type='button' onClick={this.toggleModal}>
 					Відкрити модалку
-					</button>
+					</button> */}
 
 				{/* <Modal title='Це контент модалки-1'/> */}
-				{showModal && (
+				{/* {showModal && (
 					<Modal
 						// title='Це контент модалки-2'
 						onClose={this.toggleModal}
@@ -76,8 +80,17 @@ export class AppComplexFormsLifeCycle extends Component {
 							Закрити модалку
 						</button>
 					</Modal>
-				)}
+				)} */}
 				{/* <ColorBoxLifeCycle colorBoxes={colorBoxOptions}/> */}
+				{/*//! Таймер */}
+        <button
+          type="button"
+          onClick={this.toggleModal}
+        >
+          Старт/Стоп таймер
+        </button>
+        {showModal &&<Clock />}
+
 			</>
 		)
 	}
