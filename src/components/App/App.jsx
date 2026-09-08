@@ -25,6 +25,7 @@ import { CgOpenCollective } from 'react-icons/cg'
 import {RegistrationIdentification}  from "@/components/RegistrationIdentification/RegistrationIdentification.jsx"
 import debounce from 'lodash.debounce'
 
+import {ModalRegistrationIdentification} from '@/components/ModalRegistrationIdentification/ModalRegistrationIdentification.jsx'
 //! Приклад початкового сортування на ім'я (за полем name.brief)
 
 const aircrafts2 = aircrafts //! Це не окрема копія, це копія за посиланям
@@ -86,7 +87,8 @@ export class App extends Component {
 		inputSearchValue: '', //! значення inputSearch
 		radioButtonValue: 'brief', //! значення радіо-кнопки
 		aircraftsArrAfterFiltration: aircrafts, //! дубльоване значення aircraftsArr після фільтрації
-		modelsSelectedScale: aircrafts //! масив моделей обраного масштабу
+		modelsSelectedScale: aircrafts, //! масив моделей обраного масштабу
+		showModal: true
 	}
 
 	// * 2 При першому завантажені якщо нічого не має  у властивість стейту, то створюємо пустий масив який записуємо у LocalStorage
@@ -429,6 +431,14 @@ export class App extends Component {
 	// }
 
 	//* Для того щоб функція getActiveId, впливала (перерендирила його) на компонент planesList треба, щоб змінилися пропси які безпосередньо впливать на рендер цього компоненту
+	
+	toggleModal = () => { //? з деструктурізацією
+    console.log("🌀toggleModal");
+    this.setState(({ showModal }) => ({
+      showModal: !showModal
+    }));
+  };
+
 
 	render() {
 		//! [1] Блок диструктуризації props та state
@@ -442,7 +452,8 @@ export class App extends Component {
 			inputSearchValue, // значення inputSearch
 			aircraftsArrAfterFiltration,
 			radioButtonValue,
-			modelsSelectedScale
+			modelsSelectedScale,
+			showModal
 		} = this.state
 
 		//! [2] Блок обчислювальних дaних
@@ -513,8 +524,41 @@ export class App extends Component {
 		console.log('radioButtonValue (✅Sort): ', radioButtonValue)
 
 		console.log("🔸🔸🔸modelsSelectedScale: ", modelsSelectedScale)
+
+		console.log("🌀 Контроль відкриття/закриття модального вікна:", showModal);
 		return (
 			<>
+			{/*//!  Модалка Реєстрації та Ідентифікації/Аутентифікації (Login) користувача */}
+
+			{showModal && (
+				<ModalRegistrationIdentification onClose={this.toggleModal}>
+				<div>
+              <h1>Реєстрація та Ідентифікації/Аутентифікації (Login)</h1>
+              <p>Модалка Реєстрації та Ідентифікації/Аутентифікації (Login) користувача</p>
+              <div>
+                <button
+                  type="button"
+                  // onClick={this.toggleModal}
+                >
+                  Реєстрація
+                </button>
+                <button
+                  type="button"
+                  // onClick={this.toggleModal}
+                >
+                  Ідентифікація
+                </button>
+								<button
+                  type="button"
+                  onClick={this.toggleModal}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+			</ModalRegistrationIdentification>
+			)}
+
 			{/*//!  Реєстрація та Ідентифікація/Аутентифікація (Login) користувача */}
         <RegistrationIdentification
           onClose={this.toggleModal} //! відкриття/

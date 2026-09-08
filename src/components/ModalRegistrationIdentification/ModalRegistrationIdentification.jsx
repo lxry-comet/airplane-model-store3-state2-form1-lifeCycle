@@ -1,0 +1,63 @@
+//! 3. Модальне вікно(componentDidMount та componentWillUnmount)
+//! 3.1.Проблема z - index, як вирішувати без милиць(портали)
+//! 3.2.Слухач на keydown для Escape
+//! 3.3.Слухач на клік по Backdrop
+
+import React, { Component } from 'react';
+import { createPortal } from 'react-dom';
+
+import css from "./ModalRegistrationIdentification.module.css";
+
+const modalRoot =   
+ document.querySelector('#modal-root');
+
+export class ModalRegistrationIdentification extends Component {
+  componentDidMount() {
+    console.log('1️⃣❗️❗️.Modal componentDidMount');
+    //!: ❌ Для закриття модаки клавішею ESC - - так НЕ буде працювати з StrictMode!!!
+    //* ✅ Для закриття модаки клавішею ESC - так БУДЕ працювати з StrictMode!!!
+    window.addEventListener('keydown', this.handleKeyDownESC);
+  };
+  componentDidUpdate(prevProps, prevState) {
+    console.log("2️⃣❗️❗️.Modal componentDidUpdate");
+  };
+  componentWillUnmount() {
+    console.log('3️⃣❗️❗️.Modal componentWillUnmount');
+    window.removeEventListener('keydown', this.handleKeyDownESC);
+  };
+  //! Для закриття модаки клавішею ESC 
+  handleKeyDownESC = event => {
+    console.log("event.code:", event.code); //!
+    if (event.code === 'Escape') {
+      console.log("Натиснули ❌ESC, потрібно закрити модалку");
+      this.props.onClose();
+    };
+  };
+  handleBackdropClick = event =>{
+    //! Властивості event.target​ та event.currentTarget
+    // console.log("event.target: ", event.target);
+    // console.log("event.currentTarget: ", event.currentTarget);
+    if(event.target === event.currentTarget){
+      console.log("Клікнули в бекдроп")
+      this.props.onClose();
+    }
+  }
+  render() {
+    console.log("0️⃣❗️❗️.Modal render");
+
+    const {
+      // title, 
+      children,
+      // onClose
+    }=this.props
+
+    console.log('Children: ', children)
+
+  return createPortal(  
+      <div className={css.modalBackdrop} onClick={this.handleBackdropClick}>
+        <div className={css.modalContent} >{children}</div>
+      </div>,
+      modalRoot,
+    );
+  };
+};
