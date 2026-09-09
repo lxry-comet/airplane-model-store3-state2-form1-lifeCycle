@@ -26,6 +26,9 @@ import {RegistrationIdentification}  from "@/components/RegistrationIdentificati
 import debounce from 'lodash.debounce'
 
 import {ModalRegistrationIdentification} from '@/components/ModalRegistrationIdentification/ModalRegistrationIdentification.jsx'
+
+import {FormRegistration} from '@/components/FormRegistration/FormRegistration.jsx'
+	
 //! Приклад початкового сортування на ім'я (за полем name.brief)
 
 const aircrafts2 = aircrafts //! Це не окрема копія, це копія за посиланям
@@ -439,6 +442,11 @@ export class App extends Component {
     }));
   };
 
+//! Приймаємо об'ект з даних користувача з форми Реєстрації
+	submitForm = (data) => {
+		console.log("✅ SubmitForm: ", data)
+		// const {inputLogin, inputPassword} = data;
+	}
 
 	render() {
 		//! [1] Блок диструктуризації props та state
@@ -532,7 +540,8 @@ export class App extends Component {
 
 			{showModal && (
 				<ModalRegistrationIdentification onClose={this.toggleModal}>
-				<div>
+{/*//!  Екран вибору Реєстрації або Ідентифікації/Аутентифікації (Login) користувача */}
+				{/* <div>
               <h1>Реєстрація та Ідентифікації/Аутентифікації (Login)</h1>
               <p>Модалка Реєстрації та Ідентифікації/Аутентифікації (Login) користувача</p>
               <div>
@@ -555,11 +564,13 @@ export class App extends Component {
                   Cancel
                 </button>
               </div>
-            </div>
+            </div> */}
+{/*//!  Форма Реєстрації користувача */}
+				<FormRegistration onSubmit={this.submitForm}/>
 			</ModalRegistrationIdentification>
 			)}
 
-			{/*//!  Реєстрація та Ідентифікація/Аутентифікація (Login) користувача */}
+{/*//!  Реєстрація та Ідентифікація/Аутентифікація (Login) користувача */}
         <RegistrationIdentification
           onClose={this.toggleModal} //! відкриття/
         />

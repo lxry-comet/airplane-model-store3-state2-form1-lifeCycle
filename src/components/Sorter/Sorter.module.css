@@ -1,8 +1,12 @@
 .sorterBox{
-	    display: flex;
-			flex-direction: column;
+    position: fixed;
+    z-index: 1;
+    margin-top: 405px;
+    width: 100%;
+	display: flex;
+	flex-direction: column;
     justify-content: center;
-		    border: 8px solid #719e7091;
+	border: 8px solid #719e7091;
     border-radius: 16px;
     background-color: #c0dec9e9;
 }
