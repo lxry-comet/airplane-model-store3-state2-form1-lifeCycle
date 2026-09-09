@@ -18,17 +18,17 @@ import PlanesList from '@/components/PlanesList/PlanesList.jsx'
 // import Section from '../Section/Section.jsx'
 import Section from '@/components/Section/Section.jsx'
 import { Sorter } from '@/components/Sorter/Sorter.jsx'
-import {ScaleSelection} from '@/components/ScaleSelection/ScaleSelection.jsx'
+import { ScaleSelection } from '@/components/ScaleSelection/ScaleSelection.jsx'
 import css from './App.module.css'
 import { id } from 'date-fns/locale'
 import { CgOpenCollective } from 'react-icons/cg'
-import {RegistrationIdentification}  from "@/components/RegistrationIdentification/RegistrationIdentification.jsx"
+import { RegistrationIdentification } from "@/components/RegistrationIdentification/RegistrationIdentification.jsx"
 import debounce from 'lodash.debounce'
 
-import {ModalRegistrationIdentification} from '@/components/ModalRegistrationIdentification/ModalRegistrationIdentification.jsx'
+import { ModalRegistrationIdentification } from '@/components/ModalRegistrationIdentification/ModalRegistrationIdentification.jsx'
 
-import {FormRegistration} from '@/components/FormRegistration/FormRegistration.jsx'
-	
+import { FormRegistration } from '@/components/FormRegistration/FormRegistration.jsx'
+import { FormIdentification } from '@/components/FormIdentification/FormIdentification.jsx'
 //! Приклад початкового сортування на ім'я (за полем name.brief)
 
 const aircrafts2 = aircrafts //! Це не окрема копія, це копія за посиланям
@@ -91,7 +91,32 @@ export class App extends Component {
 		radioButtonValue: 'brief', //! значення радіо-кнопки
 		aircraftsArrAfterFiltration: aircrafts, //! дубльоване значення aircraftsArr після фільтрації
 		modelsSelectedScale: aircrafts, //! масив моделей обраного масштабу
-		showModal: true
+		//! Властивості для кристувачів
+		showModal: true, //! контроль відкриття/закриття модального вікна
+		users: [
+			{
+				"userName": "User1",
+				"userEmail": "user1@gmail.com",
+				"userPassword": "u1",
+				"userExperience": "",
+				"userAge": "",
+			},
+			{
+				"userName": "User2",
+				"userEmail": "user2@gmail.com",
+				"userPassword": "u2",
+				"userExperience": "master",
+				"userAge": "26-35",
+			},
+			{
+				"userName": "User3",
+				"userEmail": "user3@gmail.com",
+				"userPassword": "u3",
+				"userExperience": "",
+				"userAge": "",
+			}
+		]
+		//! масив з даними користувачів
 	}
 
 	// * 2 При першому завантажені якщо нічого не має  у властивість стейту, то створюємо пустий масив який записуємо у LocalStorage
@@ -122,8 +147,8 @@ export class App extends Component {
 		this.setState({
 			inputSearchValue: '',
 
-			aircraftsArray:  this.state.modelsSelectedScale,
-			aircraftsArrAfterFiltration:  this.state.modelsSelectedScale,
+			aircraftsArray: this.state.modelsSelectedScale,
+			aircraftsArrAfterFiltration: this.state.modelsSelectedScale,
 			aircraftTitle: 'Магазин моделей літаків та вертольотів',
 			activeButton: 'allButton',
 			bgColor: 'lightgreen',
@@ -154,7 +179,7 @@ export class App extends Component {
 	biplaneFiltration = () => {
 		console.log('biplaneFiltration')
 
-		const biplanesArray =  this.state.modelsSelectedScale.filter(
+		const biplanesArray = this.state.modelsSelectedScale.filter(
 			item => item.aircraftType === 'biplane'
 		)
 
@@ -174,7 +199,7 @@ export class App extends Component {
 	}
 	helicopterFiltration = () => {
 		console.log('helicopterFiltration')
-		const helicopterArray =  this.state.modelsSelectedScale.filter(
+		const helicopterArray = this.state.modelsSelectedScale.filter(
 			item => item.aircraftType === 'helicopter'
 		)
 
@@ -377,33 +402,33 @@ export class App extends Component {
 		})
 	}
 	getModelsSelectedScale = modelsScale => {
-		console.log("📗Масив моделей обраного масштабу :", modelsScale);
+		console.log("📗Масив моделей обраного масштабу :", modelsScale)
 		// this.setState({
 		// 	modelsSelectedScale: modelsScale,
 		// 	aircraftsArray: modelsScale.filter(item => item.aircraftType === 'plane'),
 		// 	aircraftsArrAfterFiltration: modelsScale.filter(item => item.aircraftType === 'plane')
 		// })
-	//! Аналізувати натиснуту кнопку фільтрів.  
+		//! Аналізувати натиснуту кнопку фільтрів.  
 
-	
-	console.log("🌐 Кнопка фільтра: ", this.state.activeButton)
-	//! В залежості від значення this.state.activeButton, створюємо 4 різних зеачення aircraftsArray Ta aircraftsArrayAfterFiltration
-	let result = []; //? масив
-	switch(this.state.activeButton){
-		case 'allButton':
-			result = modelsScale;
-			break;
-		case 'planeButton':
-			result = modelsScale.filter(item => item.aircraftType === 'plane')
-			break;
-		case 'biplaneButton':
-			result = modelsScale.filter(item => item.aircraftType === 'biplane')
-			break;
-		case 'helicopterButton':
-			result = modelsScale.filter(item => item.aircraftType === 'helicopter')
-			break;	
-		default:
-			result = [];
+
+		console.log("🌐 Кнопка фільтра: ", this.state.activeButton)
+		//! В залежості від значення this.state.activeButton, створюємо 4 різних зеачення aircraftsArray Ta aircraftsArrayAfterFiltration
+		let result = [] //? масив
+		switch (this.state.activeButton) {
+			case 'allButton':
+				result = modelsScale
+				break
+			case 'planeButton':
+				result = modelsScale.filter(item => item.aircraftType === 'plane')
+				break
+			case 'biplaneButton':
+				result = modelsScale.filter(item => item.aircraftType === 'biplane')
+				break
+			case 'helicopterButton':
+				result = modelsScale.filter(item => item.aircraftType === 'helicopter')
+				break
+			default:
+				result = []
 		}
 		this.setState({
 			modelsSelectedScale: modelsScale,
@@ -434,18 +459,27 @@ export class App extends Component {
 	// }
 
 	//* Для того щоб функція getActiveId, впливала (перерендирила його) на компонент planesList треба, щоб змінилися пропси які безпосередньо впливать на рендер цього компоненту
-	
-	toggleModal = () => { //? з деструктурізацією
-    console.log("🌀toggleModal");
-    this.setState(({ showModal }) => ({
-      showModal: !showModal
-    }));
-  };
 
-//! Приймаємо об'ект з даних користувача з форми Реєстрації
-	submitForm = (data) => {
-		console.log("✅ SubmitForm: ", data)
+	toggleModal = () => { //? з деструктурізацією
+		console.log("🌀toggleModal")
+		this.setState(({ showModal }) => ({
+			showModal: !showModal
+		}))
+	};
+
+	//! Приймаємо об'ект з даних користувача з форми Реєстрації
+	submitForm = (user) => {
+		console.log("✅ SubmitForm: ", user)
 		// const {inputLogin, inputPassword} = data;
+		this.setState((prevState) => {
+			return {
+				users: [...prevState.users, user]
+			}
+		})
+	}
+	//! Вхід в обліковий запис
+	accountLogin = (data) => {
+		console.log("🙆‍♂️Вхід в обліковий запис: ", data) //!
 	}
 
 	render() {
@@ -461,7 +495,8 @@ export class App extends Component {
 			aircraftsArrAfterFiltration,
 			radioButtonValue,
 			modelsSelectedScale,
-			showModal
+			showModal,
+			users
 		} = this.state
 
 		//! [2] Блок обчислювальних дaних
@@ -533,15 +568,17 @@ export class App extends Component {
 
 		console.log("🔸🔸🔸modelsSelectedScale: ", modelsSelectedScale)
 
-		console.log("🌀 Контроль відкриття/закриття модального вікна:", showModal);
+		console.log("🌀 Контроль відкриття/закриття модального вікна:", showModal)
+
+		console.log("👨‍👩‍👦‍👦 Масив з даними користувачів:", users)
 		return (
 			<>
-			{/*//!  Модалка Реєстрації та Ідентифікації/Аутентифікації (Login) користувача */}
+				{/*//!  Модалка Реєстрації та Ідентифікації/Аутентифікації (Login) користувача */}
 
-			{showModal && (
-				<ModalRegistrationIdentification onClose={this.toggleModal}>
-{/*//!  Екран вибору Реєстрації або Ідентифікації/Аутентифікації (Login) користувача */}
-				{/* <div>
+				{showModal && (
+					<ModalRegistrationIdentification onClose={this.toggleModal}>
+						{/*//!  Екран вибору Реєстрації або Ідентифікації/Аутентифікації (Login) користувача */}
+						{/* <div>
               <h1>Реєстрація та Ідентифікації/Аутентифікації (Login)</h1>
               <p>Модалка Реєстрації та Ідентифікації/Аутентифікації (Login) користувача</p>
               <div>
@@ -565,15 +602,20 @@ export class App extends Component {
                 </button>
               </div>
             </div> */}
-{/*//!  Форма Реєстрації користувача */}
-				<FormRegistration onSubmit={this.submitForm}/>
-			</ModalRegistrationIdentification>
-			)}
+						{/*//!  Форма Реєстрації користувача */}
+						{/* <FormRegistration onSubmit={this.submitForm}/> */}
 
-{/*//!  Реєстрація та Ідентифікація/Аутентифікація (Login) користувача */}
-        <RegistrationIdentification
-          onClose={this.toggleModal} //! відкриття/
-        />
+						{/*//!  Форма Ідентифікації/Аутентифікації (Login) користувача */}
+						<FormIdentification users={users}/>
+
+					</ModalRegistrationIdentification>
+
+				)}
+
+				{/*//!  Реєстрація та Ідентифікація/Аутентифікація (Login) користувача */}
+				<RegistrationIdentification
+					onClose={this.toggleModal} //! відкриття/
+				/>
 
 				<ScaleSelection
 					aircrafts={aircrafts}
@@ -616,7 +658,7 @@ export class App extends Component {
 
 						// ! перевірити кількість обраних моделей в  numberOfSelectedModels, якщо він === 0 то title === "Кошик пустий" і ul не ренберемо, а якщо numberOfSelectedModels є хочаб 1 обрана модель то тоді title === "Кошик" і ul ренберемо
 
-						items={	
+						items={
 							aircraftTitle === 'Кошик'
 								? selectedModels //! Чи можна так робити?
 								: aircraftsArray

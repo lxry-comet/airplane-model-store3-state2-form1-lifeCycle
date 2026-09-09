@@ -27,8 +27,6 @@ export class FormRegistration extends Component {
 			useruserExperience,
 			useruseruserPassword
 		} = this.state
-
-		console.log(`Email: ${userEmail}, Password: ${userPassword}`)
 		this.props.onSubmit({ ...this.state }) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
 		// form.reset();
 		this.reset() //! очищуємо поля всіх інпутів
@@ -149,7 +147,7 @@ export class FormRegistration extends Component {
 						value={userAge}
 						onChange={this.handleChange}
 					>
-						<option value='' disabled>...</option>
+						<option value=''>...</option>
 						<option value='18-25'>18-25</option>
 						<option value='26-35'>26-35</option>
 						<option value='36+'>36+</option>
