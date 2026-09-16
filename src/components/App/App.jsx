@@ -478,6 +478,7 @@ export class App extends Component {
 		})
 	}
 	//! Вхід в обліковий запис
+	
 	accountLogin = (data) => {
 		console.log("🙆‍♂️Вхід в обліковий запис: ", data) //!
 	}
@@ -542,6 +543,7 @@ export class App extends Component {
 			}, 0)
 
 		//! [3] Блок консолей необхідних даних
+		console.log("=========================================================")
 		console.log('AircraftsArray: ', aircraftsArray)
 		console.log('🆔 aircraftId State: ', aircraftId)
 		console.log('Ⓜ️ Indices Selected Models: ', indicesSelectedModels)
@@ -571,6 +573,7 @@ export class App extends Component {
 		console.log("🌀 Контроль відкриття/закриття модального вікна:", showModal)
 
 		console.log("👨‍👩‍👦‍👦 Масив з даними користувачів:", users)
+		console.log("=========================================================")
 		return (
 			<>
 				{/*//!  Модалка Реєстрації та Ідентифікації/Аутентифікації (Login) користувача */}
@@ -603,10 +606,13 @@ export class App extends Component {
               </div>
             </div> */}
 						{/*//!  Форма Реєстрації користувача */}
-						{/* <FormRegistration onSubmit={this.submitForm}/> */}
+						<FormRegistration 
+						onSubmit={this.submitForm}
+						users={users}
+						/>
 
 						{/*//!  Форма Ідентифікації/Аутентифікації (Login) користувача */}
-						<FormIdentification users={users}/>
+						{/*<FormIdentification users={users}/>*/}
 
 					</ModalRegistrationIdentification>
 

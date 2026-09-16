@@ -27,6 +27,21 @@ export class FormRegistration extends Component {
 			useruserExperience,
 			useruseruserPassword
 		} = this.state
+		const {
+			users
+		} = this.props
+		//! Створення перевірки на відповідність емейлу до імені користувача який написаний в інпуті і в стейті
+		//! userEmail === this.props.users.userEmail
+		console.log("🌐users: ", this.props.users[0].userEmail)
+		const isEmaiNotlUniqueArr = users.filter(item => item.userEmail === userEmail);
+		console.log("🔸⚡🔸isEmaiNotlUniqueArr: ", isEmaiNotlUniqueArr); 
+		const isEmaiNotlUnique = isEmaiNotlUniqueArr.length;
+		console.log("📩Email не унікальний?:", !!isEmaiNotlUnique);
+		if (isEmaiNotlUnique){
+			alert(`❗️Користувач з E-mail: ${userEmail} вже існує`);
+      console.log(`❗️Користувач з E-mail: ${userEmail} вже існує`);
+			return;
+		}
 		this.props.onSubmit({ ...this.state }) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
 		// form.reset();
 		this.reset() //! очищуємо поля всіх інпутів
@@ -55,7 +70,7 @@ export class FormRegistration extends Component {
 	render() {
 		const { userName, userEmail, userPassword, userExperience, userAge, userLicence } = this.state
 
-		console.log('----------------------------------------------')
+		console.log('______________________________________________')
 		console.log('🛅 Значення userName:', userName)
 		console.log('🛅 Значення userEmail:', userEmail)
 		console.log('🛅 Значення userPassword:', userPassword)
@@ -78,6 +93,7 @@ export class FormRegistration extends Component {
 					value={userName}
 					placeholder="Ім'я"
 					onChange={this.handleChange}
+					required
 				/>
 
 				<label className={css.labelFormRegistration} htmlFor='userEmail'>
@@ -91,6 +107,7 @@ export class FormRegistration extends Component {
 					value={userEmail}
 					placeholder='Email'
 					onChange={this.handleChange}
+					required
 				/>
 
 				<label className={css.labelFormRegistration} htmlFor='userPassword'>
@@ -104,6 +121,7 @@ export class FormRegistration extends Component {
 					value={userPassword}
 					placeholder='Пароль'
 					onChange={this.handleChange}
+					required
 				/>
 				{/*//! + 4.4.5.Радіокнопки */}
 				<label>
