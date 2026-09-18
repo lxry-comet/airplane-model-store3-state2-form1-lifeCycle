@@ -40,7 +40,18 @@ export class FormIdentification extends Component {
       console.log(`Користувач з таким E-mail: ${userEmail} відсутній☹️`);
 			return;
 		}
-				
+		//! Перевірка Пароля (Аутентифікація)
+		//? Перевірка за userPassword порівнюючи userPassword який є в user
+		const user = users.find(user => user.userEmail === userEmail)
+		console.log("Знайли користувача за емейлом: ", user)
+		
+		if (user.userPassword !== userPassword){
+			alert(`Введений неправильний пароль☹️☹️`);
+      console.log(`Введений неправильний пароль☹️☹️`);
+			return;
+		} 
+		alert(`Вітаю Вас, ${user.userName} 😊 \nІдентифікація/Аутентифікація пройдена ✅`);
+
 		this.props.onAccountLogin({ ...this.state }) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
 		// form.reset();
 		this.reset() //! очищуємо поля всіх інпутів
