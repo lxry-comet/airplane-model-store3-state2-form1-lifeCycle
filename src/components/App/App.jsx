@@ -606,13 +606,13 @@ export class App extends Component {
               </div>
             </div> */}
 						{/*//!  Форма Реєстрації користувача */}
-						<FormRegistration 
+						{/* <FormRegistration 
 						onSubmit={this.submitForm}
 						users={users}
-						/>
+						/> */}
 
 						{/*//!  Форма Ідентифікації/Аутентифікації (Login) користувача */}
-						{/*<FormIdentification users={users}/>*/}
+						<FormIdentification users={users}/>	
 
 					</ModalRegistrationIdentification>
 

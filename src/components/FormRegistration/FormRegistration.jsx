@@ -101,7 +101,7 @@ export class FormRegistration extends Component {
 				</label>
 				<input
 					className={css.inputFormRegistration}
-					type='text'
+					type='email'
 					id='userEmail'
 					name='userEmail'
 					value={userEmail}

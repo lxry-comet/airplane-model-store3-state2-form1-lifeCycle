@@ -4,6 +4,7 @@ import css from './FormIdentification.module.css'
 const INITIAL_STATE = {
 	userEmail: '',
 	userPassword: '',
+	useruserLicence: false
 }
 
 export class FormIdentification extends Component {
@@ -75,12 +76,13 @@ export class FormIdentification extends Component {
 				</label>
 				<input
 					className={css.inputFormIdentification}
-					type='text'
+					type='email'
 					id='userEmail'
 					name='userEmail'
 					value={userEmail}
 					placeholder='Email'
 					onChange={this.handleChange}
+					required
 				/>
 
 				<label className={css.labelFormIdentification} htmlFor='userPassword'>
@@ -94,13 +96,14 @@ export class FormIdentification extends Component {
 					value={userPassword}
 					placeholder='Пароль'
 					onChange={this.handleChange}
+					required
 				/>
 				{/*//! Кнопки Login та Cancel */}
 				<div className={css.buttonBoxFormIdentification}>
 					<button
 						className={`${css.buttonFormIdentification} ${css.loginButton}`}
 						type="submit"
-
+						disabled={!userEmail || !userPassword} //! блокування кнопки 
 					>
 						Login
 					</button>
@@ -108,7 +111,6 @@ export class FormIdentification extends Component {
 					<button
 						className={`${css.buttonFormIdentification} ${css.cancelButton}`}
 						type="button"
-
 					>
 						Cancel
 					</button>
