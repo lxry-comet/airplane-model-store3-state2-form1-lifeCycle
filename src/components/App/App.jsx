@@ -612,7 +612,11 @@ export class App extends Component {
 						/> */}
 
 						{/*//!  Форма Ідентифікації/Аутентифікації (Login) користувача */}
-						<FormIdentification users={users}/>	
+
+						<FormIdentification 
+							onAccountLogin={this.accountLogin}
+							users={users
+						}/>	
 
 					</ModalRegistrationIdentification>
 
