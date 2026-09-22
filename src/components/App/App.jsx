@@ -615,9 +615,8 @@ export class App extends Component {
 
 						<FormIdentification 
 							onAccountLogin={this.accountLogin}
-							users={users
-						}/>	
-
+							users={users}
+						/>	
 					</ModalRegistrationIdentification>
 
 				)}
