@@ -27,10 +27,12 @@ import debounce from 'lodash.debounce'
 
 import { ModalRegistrationIdentification } from '@/components/ModalRegistrationIdentification/ModalRegistrationIdentification.jsx'
 
+import {FormChoiceRegistrationOrIdentification} from '@/components/FormChoiceRegistrationOrIdentification/FormChoiceRegistrationOrIdentification.jsx'
 import { FormRegistration } from '@/components/FormRegistration/FormRegistration.jsx'
 import { FormIdentification } from '@/components/FormIdentification/FormIdentification.jsx'
-//! Приклад початкового сортування на ім'я (за полем name.brief)
 
+
+//! Приклад початкового сортування на ім'я (за полем name.brief)
 const aircrafts2 = aircrafts //! Це не окрема копія, це копія за посиланям
 
 // const aircrafts2 = [...aircrafts]; //! Це окрема копія
@@ -93,6 +95,8 @@ export class App extends Component {
 		modelsSelectedScale: aircrafts, //! масив моделей обраного масштабу
 		//! Властивості для кристувачів
 		showModal: true, //! контроль відкриття/закриття модального вікна
+
+		//! масив з даними користувачів
 		users: [
 			{
 				"userName": "User1",
@@ -115,8 +119,8 @@ export class App extends Component {
 				"userExperience": "",
 				"userAge": "",
 			}
-		]
-		//! масив з даними користувачів
+		],
+		modalType: "",  //! 🧾 індикатор типу модального вікна
 	}
 
 	// * 2 При першому завантажені якщо нічого не має  у властивість стейту, то створюємо пустий масив який записуємо у LocalStorage
@@ -460,10 +464,13 @@ export class App extends Component {
 
 	//* Для того щоб функція getActiveId, впливала (перерендирила його) на компонент planesList треба, щоб змінилися пропси які безпосередньо впливать на рендер цього компоненту
 
-	toggleModal = () => { //? з деструктурізацією
-		console.log("🌀toggleModal")
+	toggleModal = (event) => { //? з деструктурізацією
+		console.log("🌀toggleModal:", event)
+		const modalType = event ? event.currentTarget.textContent : undefined   
+		console.log("modalType:", modalType)
 		this.setState(({ showModal }) => ({
-			showModal: !showModal
+			showModal: !showModal,
+			modalType
 		}))
 	};
 
@@ -497,7 +504,8 @@ export class App extends Component {
 			radioButtonValue,
 			modelsSelectedScale,
 			showModal,
-			users
+			users,
+			modalType
 		} = this.state
 
 		//! [2] Блок обчислювальних дaних
@@ -573,6 +581,7 @@ export class App extends Component {
 		console.log("🌀 Контроль відкриття/закриття модального вікна:", showModal)
 
 		console.log("👨‍👩‍👦‍👦 Масив з даними користувачів:", users)
+		console.log("🧾 Індикатор типу модального вікна:", modalType);
 		console.log("=========================================================")
 		return (
 			<>
@@ -581,30 +590,7 @@ export class App extends Component {
 				{showModal && (
 					<ModalRegistrationIdentification onClose={this.toggleModal}>
 						{/*//!  Екран вибору Реєстрації або Ідентифікації/Аутентифікації (Login) користувача */}
-						{/* <div>
-              <h1>Реєстрація та Ідентифікації/Аутентифікації (Login)</h1>
-              <p>Модалка Реєстрації та Ідентифікації/Аутентифікації (Login) користувача</p>
-              <div>
-                <button
-                  type="button"
-                  // onClick={this.toggleModal}
-                >
-                  Реєстрація
-                </button>
-                <button
-                  type="button"
-                  // onClick={this.toggleModal}
-                >
-                  Ідентифікація
-                </button>
-								<button
-                  type="button"
-                  onClick={this.toggleModal}
-                >
-                  Cancel
-                </button>
-              </div>
-            </div> */}
+						<FormChoiceRegistrationOrIdentification onClose={this.toggleModal}/>
 						{/*//!  Форма Реєстрації користувача */}
 						{/* <FormRegistration 
 						onSubmit={this.submitForm}
@@ -613,10 +599,10 @@ export class App extends Component {
 
 						{/*//!  Форма Ідентифікації/Аутентифікації (Login) користувача */}
 
-						<FormIdentification 
+						{/* <FormIdentification 
 							onAccountLogin={this.accountLogin}
 							users={users}
-						/>	
+						/>	 */}
 					</ModalRegistrationIdentification>
 
 				)}
