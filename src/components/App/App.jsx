@@ -468,7 +468,16 @@ export class App extends Component {
 		console.log("🌀toggleModal:", event)
 		const modalType = event ? event.currentTarget.textContent : undefined   
 		console.log("modalType:", modalType)
-		this.setState(({ showModal }) => ({
+		// this.setState(({ showModal }) => ({
+		// 	showModal: !showModal,
+		// 	modalType
+		// }))
+		modalType === 'Registration' || modalType === 'Login'
+		? this.setState(({ showModal }) => ({
+			showModal: true,
+			modalType
+		}))
+		: this.setState(({ showModal }) => ({
 			showModal: !showModal,
 			modalType
 		}))
