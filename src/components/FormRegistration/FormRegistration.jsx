@@ -5,9 +5,9 @@ const INITIAL_STATE = {
 	userName: '',
 	userEmail: '',
 	userPassword: '',
-	useruserExperience: '',
-	useruseruserPassword: '',
-	useruserLicence: false
+	userExperience: '',
+	userAge: '',
+	userLicence: false
 }
 
 export class FormRegistration extends Component {
@@ -24,11 +24,12 @@ export class FormRegistration extends Component {
 			userName,
 			userEmail,
 			userPassword,
-			useruserExperience,
-			useruseruserPassword
+			userExperience,
+			userAge
 		} = this.state
 		const {
-			users
+			users,
+			onClose
 		} = this.props
 		//! Створення перевірки на відповідність емейлу до імені користувача який написаний в інпуті і в стейті
 		//! userEmail === this.props.users.userEmail
@@ -45,6 +46,7 @@ export class FormRegistration extends Component {
 		this.props.onSubmit({ ...this.state }) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
 		// form.reset();
 		this.reset() //! очищуємо поля всіх інпутів
+		onClose()
 	}
 
 	handleChange = event => {
@@ -69,7 +71,7 @@ export class FormRegistration extends Component {
 	}
 	render() {
 		const { userName, userEmail, userPassword, userExperience, userAge, userLicence } = this.state
-
+		const {onClose} = this.props
 		console.log('______________________________________________')
 		console.log('🛅 Значення userName:', userName)
 		console.log('🛅 Значення userEmail:', userEmail)
@@ -181,14 +183,24 @@ export class FormRegistration extends Component {
 						onChange={this.handleChangeCheckbox}
 					/>
 				</label>
+{/*//! Кнопки Submit та Cancel */}
+      <div className={css.buttonBoxFormRegistration}>
 
 				<button
-					className={css.buttonFormRegistration}
+					className={`${css.buttonFormRegistration} ${css.registrationButton}`}
 					type='submit'
 					disabled={!userLicence} //! блокування кнопки чекбоксом
 				>
 					Login
 				</button>
+				<button
+					className={`${css.buttonFormRegistration} ${css.cancelButton}`}
+					type='button'
+					onClick={onClose}
+				>
+					Cancel
+				</button>
+				</div>
 			</form>
 		)
 	}

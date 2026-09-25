@@ -599,19 +599,30 @@ export class App extends Component {
 				{showModal && (
 					<ModalRegistrationIdentification onClose={this.toggleModal}>
 						{/*//!  Екран вибору Реєстрації або Ідентифікації/Аутентифікації (Login) користувача */}
-						<FormChoiceRegistrationOrIdentification onClose={this.toggleModal}/>
+						
+						{!modalType && 
+							<FormChoiceRegistrationOrIdentification 
+								onClose={this.toggleModal}
+							/>
+						}
 						{/*//!  Форма Реєстрації користувача */}
-						{/* <FormRegistration 
-						onSubmit={this.submitForm}
-						users={users}
-						/> */}
+						{modalType === "Registration" && 
+							<FormRegistration 
+								onSubmit={this.submitForm}
+								onClose={this.toggleModal}
+								users={users}
+							/> 
+						}
 
 						{/*//!  Форма Ідентифікації/Аутентифікації (Login) користувача */}
 
-						{/* <FormIdentification 
-							onAccountLogin={this.accountLogin}
-							users={users}
-						/>	 */}
+						{ modalType === "Login" && 
+							<FormIdentification 
+								onAccountLogin={this.accountLogin}
+								onClose={this.toggleModal}
+								users={users}
+							/>	 
+						}
 					</ModalRegistrationIdentification>
 
 				)}

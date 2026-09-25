@@ -55,6 +55,7 @@ export class FormIdentification extends Component {
 		this.props.onAccountLogin({ ...this.state }) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
 		// form.reset();
 		this.reset() //! очищуємо поля всіх інпутів
+		this.props.onClose()
 	}
 
 	handleChange = event => {
@@ -80,7 +81,7 @@ export class FormIdentification extends Component {
 	
 	render() {
 		const { userEmail, userPassword } = this.state
-
+		const {onClose} = this.props
 		console.log('----------------------------------------------')
 		console.log('🛅 Значення userEmail:', userEmail)
 		console.log('🛅 Значення userPassword:', userPassword)
@@ -130,6 +131,7 @@ export class FormIdentification extends Component {
 					<button
 						className={`${css.buttonFormIdentification} ${css.cancelButton}`}
 						type="button"
+						onClick={onClose}
 					>
 						Cancel
 					</button>
