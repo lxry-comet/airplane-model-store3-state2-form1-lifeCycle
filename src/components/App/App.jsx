@@ -120,7 +120,18 @@ export class App extends Component {
 				"userAge": "",
 			}
 		],
+		//! 🗣 активний (авторизований) користувач
+		// activeUser:
+		// 	{
+		// 		"userName": "User1",
+		// 		"userEmail": "user1@gmail.com",
+		// 		"userPassword": "u1",
+		// 		"userExperience": "",
+		// 		"userAge": "",}, 
+		activeUser: null,
+    activeUserId: null, //! #️⃣🗣 індекс Активного (авторизованого) користувача
 		modalType: "",  //! 🧾 індикатор типу модального вікна
+
 	}
 
 	// * 2 При першому завантажені якщо нічого не має  у властивість стейту, то створюємо пустий масив який записуємо у LocalStorage
@@ -514,6 +525,8 @@ export class App extends Component {
 			modelsSelectedScale,
 			showModal,
 			users,
+			activeUser,
+			activeUserId,
 			modalType
 		} = this.state
 
@@ -590,6 +603,9 @@ export class App extends Component {
 		console.log("🌀 Контроль відкриття/закриття модального вікна:", showModal)
 
 		console.log("👨‍👩‍👦‍👦 Масив з даними користувачів:", users)
+		console.log("🗣 Активний (авторизований) користувач:", activeUser);
+    console.log("#️⃣🗣 Індекс Активного(авторизованого) користувача", activeUserId);
+
 		console.log("🧾 Індикатор типу модального вікна:", modalType);
 		console.log("=========================================================")
 		return (
@@ -630,6 +646,7 @@ export class App extends Component {
 				{/*//!  Реєстрація та Ідентифікація/Аутентифікація (Login) користувача */}
 				<RegistrationIdentification
 					onClose={this.toggleModal} //! відкриття/
+					activeUser={activeUser}
 				/>
 
 				<ScaleSelection
