@@ -46,7 +46,15 @@ export class FormRegistration extends Component {
       console.log(`❗️Користувач з E-mail: ${userEmail} вже існує`);
 			return;
 		}
-		this.props.onSubmit({ ...this.state }) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
+		this.props.onSubmit({
+		 	userName,
+			userEmail,
+			userPassword,
+			userExperience,
+			userAge,
+			indicesSelectedModels: [],
+			isActive: false
+		}) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
 		// form.reset();
 		this.reset() //! очищуємо поля всіх інпутів
 		onClose()
