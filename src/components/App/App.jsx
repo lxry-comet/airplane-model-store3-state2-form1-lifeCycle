@@ -97,29 +97,29 @@ export class App extends Component {
 		showModal: true, //! контроль відкриття/закриття модального вікна
 
 		//! масив з даними користувачів
-		users: [
-			{
-				"userName": "User1",
-				"userEmail": "user1@gmail.com",
-				"userPassword": "u1",
-				"userExperience": "",
-				"userAge": "",
-			},
-			{
-				"userName": "User2",
-				"userEmail": "user2@gmail.com",
-				"userPassword": "u2",
-				"userExperience": "master",
-				"userAge": "26-35",
-			},
-			{
-				"userName": "User3",
-				"userEmail": "user3@gmail.com",
-				"userPassword": "u3",
-				"userExperience": "",
-				"userAge": "",
-			}
-		],
+		// users: [
+		// 	{
+		// 		"userName": "User1",
+		// 		"userEmail": "user1@gmail.com",
+		// 		"userPassword": "u1",
+		// 		"userExperience": "",
+		// 		"userAge": "",
+		// 	},
+		// 	{
+		// 		"userName": "User2",
+		// 		"userEmail": "user2@gmail.com",
+		// 		"userPassword": "u2",
+		// 		"userExperience": "master",
+		// 		"userAge": "26-35",
+		// 	},
+		// 	{
+		// 		"userName": "User3",
+		// 		"userEmail": "user3@gmail.com",
+		// 		"userPassword": "u3",
+		// 		"userExperience": "",
+		// 		"userAge": "",
+		// 	}
+		// ],
 		//! 🗣 активний (авторизований) користувач
 		// activeUser:
 		// 	{
@@ -128,6 +128,8 @@ export class App extends Component {
 		// 		"userPassword": "u1",
 		// 		"userExperience": "",
 		// 		"userAge": "",}, 
+		
+		users: JSON.parse(localStorage.getItem("users")) || [],
 		activeUser: null,
     activeUserId: null, //! #️⃣🗣 індекс Активного (авторизованого) користувача
 		modalType: "",  //! 🧾 індикатор типу модального вікна
@@ -137,11 +139,19 @@ export class App extends Component {
 	// * 2 При першому завантажені якщо нічого не має  у властивість стейту, то створюємо пустий масив який записуємо у LocalStorage
 	componentDidMount() {
 		console.log('Спрацював componentDidMount')
+		//*Ініціалізація indicesSelectedModels
 		const saved = localStorage.getItem('indicesSelectedModels')
 		if (!saved) {
 			localStorage.setItem('indicesSelectedModels', JSON.stringify([]))
 		}
-	}
+
+		//* Ініціалізація users
+		const initialUsers = localStorage.getItem('users')
+		if (!initialUsers) {
+			localStorage.setItem('users', JSON.stringify([]))
+		}
+ 	}
+
 
 	// * 3 При будь яких змінах властивості selectedButtonIdx, записуємо selectedButtonIdx у LocalStorage
 
@@ -498,11 +508,20 @@ export class App extends Component {
 	submitForm = (user) => {
 		console.log("✅ SubmitForm: ", user)
 		// const {inputLogin, inputPassword} = data;
-		this.setState((prevState) => {
-			return {
-				users: [...prevState.users, user]
-			}
-		})
+		//? оновлюємо базу данних - localStorage поле users
+		//* [1] Стягнути в змінну usersDb базу даних localStorage
+		//* [2] Додаємо користувача user до usersDb і кладемо цей результат в нову змінну newUsers
+		//* [3] Перезаписуємо поле users в LocalStorage новими данними з newUsers
+		const usersDb =  JSON.parse(localStorage.getItem("users"))
+		console.log('usersDb: ', usersDb)
+		const newUsers =  [...usersDb, user]
+		localStorage.setItem("users", JSON.stringify(newUsers))
+		this.setState({ users: newUsers});
+		// this.setState((prevState) => {	
+		// 	return {
+		// 		users: [...prevState.users, user]
+		// 	}
+		// })
 	}
 	//! Вхід в обліковий запис
 	
@@ -626,7 +645,7 @@ export class App extends Component {
 							<FormRegistration 
 								onSubmit={this.submitForm}
 								onClose={this.toggleModal}
-								users={users}
+								// users={users}
 							/> 
 						}
 
@@ -636,7 +655,7 @@ export class App extends Component {
 							<FormIdentification 
 								onAccountLogin={this.accountLogin}
 								onClose={this.toggleModal}
-								users={users}
+								// users={users}
 							/>	 
 						}
 					</ModalRegistrationIdentification>

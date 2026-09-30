@@ -28,12 +28,15 @@ export class FormRegistration extends Component {
 			userAge
 		} = this.state
 		const {
-			users,
+			// users,
 			onClose
 		} = this.props
 		//! Створення перевірки на відповідність емейлу до імені користувача який написаний в інпуті і в стейті
 		//! userEmail === this.props.users.userEmail
-		console.log("🌐users: ", this.props.users[0].userEmail)
+		// console.log("🌐users: ", this.props.users[0].userEmail)
+		
+		const users =  JSON.parse(localStorage.getItem("users"))
+		console.log("🌐users: ", users)
 		const isEmaiNotlUniqueArr = users.filter(item => item.userEmail === userEmail);
 		console.log("🔸⚡🔸isEmaiNotlUniqueArr: ", isEmaiNotlUniqueArr); 
 		const isEmaiNotlUnique = isEmaiNotlUniqueArr.length;
