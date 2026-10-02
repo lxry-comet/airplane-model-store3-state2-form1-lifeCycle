@@ -524,8 +524,36 @@ export class App extends Component {
 	}
 	//! Вхід в обліковий запис
 	
-	accountLogin = (data) => {
-		console.log("🙆‍♂️Вхід в обліковий запис: ", data) //!
+	accountLogin = (userEmail) => {
+		console.log("🙆‍♂️Вхід в обліковий запис: ", userEmail)
+		
+		
+		//! Необхідні дії:
+		//* [1] - Отримати в змінну users масив користувачів в localStorage
+		//* [2] - Серед масиву users треба знайти користувача за email який дорівнює userEmail.
+		//* Цього користувача запишемо в змінну activeUser
+		//* [3] - в масиві users відшукати активного користувача та замінити його властивість isActive: true 
+		//* [4] - Знайти id(індекс) активного юзера 
+		//* [5] - Треба передати інформацію про activeUsers до localStorage і state
+		//! [1]
+			const users = JSON.parse(localStorage.getItem("users"))
+			console.log("users ДО: ",users)
+		//![2]
+			const activeUser = users.find(user => user.userEmail === userEmail)
+			console.log("activeUser: ",activeUser)
+		//![3]
+			activeUser.isActive = true
+			console.log("users ПІСЛЯ: ",users)
+		//![4]
+			const activeUserId = users.findIndex(user => user.userEmail === userEmail)
+			console.log("activeUserId: ",activeUserId)
+		//![5]
+			localStorage.setItem("users", JSON.stringify(users))	
+			this.setState({
+				users,
+				activeUser,
+				activeUserId,
+			})
 	}
 
 	render() {

@@ -4,7 +4,6 @@ import css from './FormIdentification.module.css'
 const INITIAL_STATE = {
 	userEmail: '',
 	userPassword: '',
-	useruserLicence: false
 }
 
 export class FormIdentification extends Component {
@@ -52,7 +51,7 @@ export class FormIdentification extends Component {
 		} 
 		alert(`Вітаю Вас, ${user.userName} 😊 \nІдентифікація/Аутентифікація пройдена ✅`);
 
-		this.props.onAccountLogin({ ...this.state }) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
+		this.props.onAccountLogin(userEmail) //! Тут відбувається виклик функції з App accountLogin({ ...this.state })
 		// form.reset();
 		this.reset() //! очищуємо поля всіх інпутів
 		this.props.onClose()
