@@ -23,14 +23,14 @@ export class FormIdentification extends Component {
 		} = this.state
 		console.log(`✉️E-mail: ${userEmail},🈳Password: ${userPassword}`);
 
-
 		//! Перевірка на наявність userEmail (Ідентифікація)
 		//? перевірка за userEmail порівнюючи userEmail з тим який в users
 		//? Перебрати масив users знаходячи на кожній ітерації значення властивості кожного об'єкту (елементу) userEmail 
 		//? та порівнювати її з змінною userEmail. Якщо відповідність знайдена перейти до іншого кроку (аутентифікація) 
 		//? інакше дпти повідомлення: console.log(Користувач з таким E-mail: ${userEmail} відсутній☹️);
 
-		const {users} = this.props
+		// const {users} = this.props
+		const users = JSON.parse(localStorage.getItem("users"))
 		console.log("🔸👨‍👩‍👦‍👦Users: ", users)
 		const isEmail = users.some(user => user.userEmail === userEmail);
 		console.log("📩Такий Email є в db?:", isEmail);

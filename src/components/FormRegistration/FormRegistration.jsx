@@ -57,7 +57,7 @@ export class FormRegistration extends Component {
 		}) //! Тут відбувається виклик функції з AppComplexForm submitForm({ ...this.state })
 		// form.reset();
 		this.reset() //! очищуємо поля всіх інпутів
-		onClose()
+		// onClose()
 	}
 
 	handleChange = event => {

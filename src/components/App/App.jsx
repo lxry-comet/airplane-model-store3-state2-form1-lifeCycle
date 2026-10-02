@@ -515,7 +515,7 @@ export class App extends Component {
 		console.log('usersDb: ', usersDb)
 		const newUsers =  [...usersDb, user]
 		localStorage.setItem("users", JSON.stringify(newUsers))
-		this.setState({ users: newUsers});
+		this.setState({ users: newUsers, modalType: 'Login'});
 		// this.setState((prevState) => {	
 		// 	return {
 		// 		users: [...prevState.users, user]
