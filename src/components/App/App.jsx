@@ -85,9 +85,8 @@ export class App extends Component {
 		activeButton: 'allButton',
 		bgColor: 'white',
 		aircraftId: null, //! "id" обраного елемента
-		// indicesSelectedModels: [] //! масив індексів обраних моделей
-		indicesSelectedModels:
-			JSON.parse(localStorage.getItem('indicesSelectedModels')) || [],
+		indicesSelectedModels: [], //! масив індексів обраних моделей
+		// indicesSelectedModels: JSON.parse(localStorage.getItem('indicesSelectedModels')) || [],
 
 		inputSearchValue: '', //! значення inputSearch
 		radioButtonValue: 'brief', //! значення радіо-кнопки
@@ -139,9 +138,12 @@ export class App extends Component {
 	componentDidMount() {
 		console.log('Спрацював componentDidMount')
 		//*Ініціалізація indicesSelectedModels
-		const saved = localStorage.getItem('indicesSelectedModels')
-		if (!saved) {
-			localStorage.setItem('indicesSelectedModels', JSON.stringify([]))
+		const inicialIndicesSelectedModels = JSON.parse(localStorage.getItem('indicesSelectedModels'))
+		if (inicialIndicesSelectedModels) {
+			// localStorage.setItem('indicesSelectedModels', JSON.stringify([]))
+			this.setState({
+				indicesSelectedModels: inicialIndicesSelectedModels
+			})
 		}
 
 		//* Ініціалізація users
@@ -535,6 +537,7 @@ export class App extends Component {
 		//* [3] - в масиві users відшукати активного користувача та замінити його властивість isActive: true 
 		//* [4] - Знайти id(індекс) активного юзера 
 		//* [5] - Треба передати інформацію про activeUsers до localStorage і state
+		//* [6] - Додаємо в localStprage indecesSelectedModels з activeUser
 		//! [1]
 			const users = JSON.parse(localStorage.getItem("users"))
 			console.log("users ДО: ",users)
@@ -554,6 +557,8 @@ export class App extends Component {
 				activeUser,
 				activeUserId,
 			})
+		//![6]
+		localStorage.setItem("indicesSelectedModels", JSON.stringify(activeUser.indicesSelectedModels))
 	}
 
 
