@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import css from './RegistrationIdentification.module.css'
 
-export function RegistrationIdentification({ activeUser }) {
+export function RegistrationIdentification({ 
+	activeUser, 
+	onSignOut, 
+	onClose 
+}) {
 
 	console.log('----------------------------------------------')
 	console.log("activeUser:", activeUser)
@@ -24,6 +28,7 @@ export function RegistrationIdentification({ activeUser }) {
 						<button
 							className={`${css.buttonRegistrationIdentification} ${css.buttonRegistration}`}
 							type='button'
+							onClick={onClose}
 						>
 							Registration
 						</button>
@@ -31,6 +36,7 @@ export function RegistrationIdentification({ activeUser }) {
 						<button
 							className={`${css.buttonRegistrationIdentification} ${css.buttonLogin}`}
 							type='button'
+							onClick={onClose}
 						>
 							Login
 						</button>
@@ -40,7 +46,9 @@ export function RegistrationIdentification({ activeUser }) {
 				{activeUser &&
 					<button
 						className={`${css.buttonRegistrationIdentification} ${css.buttonSignOut}`}
-						type='button'>
+						type='button'
+						onClick={onSignOut}
+						>
 						SignOut
 					</button>
 				}

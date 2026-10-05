@@ -556,6 +556,34 @@ export class App extends Component {
 			})
 	}
 
+
+	//! Завершення сеансу облікового запису
+	
+  signOut = () => {
+    console.log("⬇️Sign Out");
+		//* [1] - Отримати в змінну users масив користувачів в localStorage
+		const users = JSON.parse(localStorage.getItem("users"))
+
+		//* [2] - Серед масиву users треба знайти користувача за isActive = true.
+		const activeUser = users.find(user => user.isActive === true)
+		//* [3] - в масиві users змінити властивість активного користувача isActive: false
+		activeUser.isActive = false
+		//* [4] - В localStorage перезаписати users
+		localStorage.setItem("users", JSON.stringify(users))
+		//* [5] - В localStorage видалити властивість indecesSelectedModels
+		localStorage.removeItem("indicesSelectedModels"); //! видаляємо масив індексів обраних моделей активного (авторизованого) користувача
+		//* [6] - Змінити  властивості в state які і відповіають за роботу з users
+		this.setState({
+			users,
+			activeUser:null,
+			activeUserId:null,
+			indicesSelectedModels: [],
+			showModal: true //✅
+			
+		})
+	}
+
+
 	render() {
 		//! [1] Блок диструктуризації props та state
 		const {
@@ -691,7 +719,8 @@ export class App extends Component {
 
 				{/*//!  Реєстрація та Ідентифікація/Аутентифікація (Login) користувача */}
 				<RegistrationIdentification
-					onClose={this.toggleModal} //! відкриття/
+					onClose={this.toggleModal} //! відкриття/закриття
+					onSignOut={this.signOut}
 					activeUser={activeUser}
 				/>
 
