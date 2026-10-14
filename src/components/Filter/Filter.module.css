@@ -79,3 +79,10 @@
     background-color: orangered;
     color: yellow;
 }
+.buttonCartFiltration:disabled {
+    background-color: #c8c8c8;
+    cursor: not-allowed;
+    box-shadow: none;
+    color: #707070;
+    border-color: darkgray;
+}

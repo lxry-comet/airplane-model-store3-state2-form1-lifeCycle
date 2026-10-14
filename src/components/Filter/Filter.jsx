@@ -7,7 +7,8 @@ export function Filter({
 	onHelicopters,
 	buttonActive,
 	onCart,
-	numberOfSelectedModels
+	numberOfSelectedModels,
+	isUserActive
 }) {
 	// console.log('ButtonActive', buttonActive)
 
@@ -76,6 +77,7 @@ export function Filter({
 				}
 				type='button'
 				onClick={onCart}
+				disabled={!isUserActive}
 			>
 				Кошик &nbsp;
 				<span

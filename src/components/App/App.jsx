@@ -741,6 +741,7 @@ export class App extends Component {
 					buttonActive={activeButton}
 					onCart={this.cartFiltration}
 					numberOfSelectedModels={numberOfSelectedModels}
+					isUserActive={activeUser}
 				/>
 				<Sorter
 					inputSearch={inputSearchValue}
