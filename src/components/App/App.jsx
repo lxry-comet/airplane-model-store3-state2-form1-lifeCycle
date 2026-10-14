@@ -67,7 +67,6 @@ aircrafts.push(...aircraftsNew)
 console.log('⚡aircrafts', aircrafts)
 
 console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++')
-
 export class App extends Component {
 	// ! План створення кошику:
 	// * [1] Отримати реакцію на кнопку "Додати до кошику" (onClick)
@@ -159,7 +158,8 @@ export class App extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		console.log('Спрацював componentDidUpdate')
 
-		if (prevState.indicesSelectedModels !== this.state.indicesSelectedModels) {
+		if (this.state.activeUser &&
+			prevState.indicesSelectedModels !== this.state.indicesSelectedModels) {
 			localStorage.setItem(
 				'indicesSelectedModels',
 				JSON.stringify(this.state.indicesSelectedModels)
@@ -584,7 +584,6 @@ export class App extends Component {
 			activeUserId:null,
 			indicesSelectedModels: [],
 			showModal: true //✅
-			
 		})
 	}
 
