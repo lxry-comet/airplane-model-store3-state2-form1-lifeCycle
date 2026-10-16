@@ -170,7 +170,6 @@ export class App extends Component {
 		}
 	}
 
-
 	// * 3 При будь яких змінах властивості selectedButtonIdx, записуємо selectedButtonIdx у LocalStorage
 
 	componentDidUpdate(prevProps, prevState) {
