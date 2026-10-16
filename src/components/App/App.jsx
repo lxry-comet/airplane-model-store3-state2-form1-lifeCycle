@@ -147,10 +147,28 @@ export class App extends Component {
 
 		//* Ініціалізація users
 		const initialUsers = localStorage.getItem('users')
+		
 		if (!initialUsers) {
 			localStorage.setItem('users', JSON.stringify([]))
 		}
- 	}
+		const users = JSON.parse(initialUsers)
+		console.log("componentDidMount🗣_❗️users:", users); 
+
+		//! Шукаємо активного користувача
+		const activeUser = users.find(user => user.isActive === true)
+		console.log("componentDidMount🗣_❗️❗️❗️Активний(авторизований) користувач:", activeUser); 
+		
+		//! Беремо users, шукаємо індекс елемента в якому властивість isActive має значення true 
+		const activeUserId = users.findIndex(user => user.isActive === true)
+		
+		if(activeUser){
+			this.setState({
+				activeUser,
+				activeUserId,
+				showModal: false
+			})
+		}
+	}
 
 
 	// * 3 При будь яких змінах властивості selectedButtonIdx, записуємо selectedButtonIdx у LocalStorage
@@ -524,11 +542,10 @@ export class App extends Component {
 		// 	}
 		// })
 	}
+
 	//! Вхід в обліковий запис
-	
 	accountLogin = (userEmail) => {
 		console.log("🙆‍♂️Вхід в обліковий запис: ", userEmail)
-		
 		
 		//! Необхідні дії:
 		//* [1] - Отримати в змінну users масив користувачів в localStorage
@@ -551,14 +568,17 @@ export class App extends Component {
 			const activeUserId = users.findIndex(user => user.userEmail === userEmail)
 			console.log("activeUserId: ",activeUserId)
 		//![5]
-			localStorage.setItem("users", JSON.stringify(users))	
+			localStorage.setItem("users", JSON.stringify(users))
+			//![6] - створюємо indicesSelectedModels з activeUser
+			const indicesSelectedModels = activeUser.indicesSelectedModels;
 			this.setState({
 				users,
 				activeUser,
 				activeUserId,
+				indicesSelectedModels
 			})
-		//![6]
-		localStorage.setItem("indicesSelectedModels", JSON.stringify(activeUser.indicesSelectedModels))
+		//![7]
+		localStorage.setItem("indicesSelectedModels", JSON.stringify(indicesSelectedModels))
 	}
 
 
