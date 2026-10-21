@@ -181,6 +181,21 @@ export class App extends Component {
 				'indicesSelectedModels',
 				JSON.stringify(this.state.indicesSelectedModels)
 			)
+			const activeUser = this.state.activeUser
+			activeUser.indicesSelectedModels = this.state.indicesSelectedModels 
+			console.log('📕 activeUser', activeUser)
+			
+			//! Відшукати індекс активного користувача
+			const users = this.state.users;
+			const indexActiveUser = this.state.users.findIndex(user => user.isActive === true);
+			console.log('📕📕 індекс активного користувача', indexActiveUser)
+			users[indexActiveUser].indicesSelectedModels =  this.state.indicesSelectedModels 
+			console.log('📕📕📕 Змінені users', users)
+
+			this.setState({
+				users,
+				activeUser
+			})
 		}
 	}
 
