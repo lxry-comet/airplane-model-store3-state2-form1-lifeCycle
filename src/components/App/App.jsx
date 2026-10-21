@@ -175,8 +175,7 @@ export class App extends Component {
 	componentDidUpdate(prevProps, prevState) {
 		console.log('Спрацював componentDidUpdate')
 
-		if (this.state.activeUser &&
-			prevState.indicesSelectedModels !== this.state.indicesSelectedModels) {
+		if (this.state.activeUser && prevState.indicesSelectedModels !== this.state.indicesSelectedModels) {
 			localStorage.setItem(
 				'indicesSelectedModels',
 				JSON.stringify(this.state.indicesSelectedModels)
@@ -197,6 +196,18 @@ export class App extends Component {
 				activeUser
 			})
 		}
+
+		//todo: users
+		console.log("✅ prevState.users", prevState.users)
+		console.log("✅ this.state.users", this.state.users)
+		console.log("✅ prevState.users", prevState.activeUser)
+		console.log("✅ this.state.users", this.state.activeUser)
+
+    if (prevState.users !== this.state.users) {
+      console.log("✅🖍✅🖍 Перезаписуємо localStorage 'users_componentDidUpdate");
+
+      localStorage.setItem("users", JSON.stringify(this.state.users));
+    };
 	}
 
 	allFiltration = () => {
