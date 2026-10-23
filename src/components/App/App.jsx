@@ -174,21 +174,39 @@ export class App extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		console.log('Спрацював componentDidUpdate')
-
+//todo: indicesSelectedModels
 		if (this.state.activeUser && prevState.indicesSelectedModels !== this.state.indicesSelectedModels) {
+      console.log("✅🖍 Перезаписуємо localStorage 'indicesSelectedModels_componentDidUpdate");
 			localStorage.setItem(
 				'indicesSelectedModels',
 				JSON.stringify(this.state.indicesSelectedModels)
 			)
-			const activeUser = this.state.activeUser
-			activeUser.indicesSelectedModels = this.state.indicesSelectedModels 
-			console.log('📕 activeUser', activeUser)
+//!============================= так не буде працювати оновлення state ========================
+			// const activeUser = this.state.activeUser
+			// activeUser.indicesSelectedModels = this.state.indicesSelectedModels 
+			// this.state.activeUser = {user:1};
+//!============================= так не буде працювати оновлення state ========================
+
 			
+			const activeUser = {... this.state.activeUser, indicesSelectedModels: this.state.indicesSelectedModels}
+			console.log('📕 activeUser', this.state.activeUser)
+
+
 			//! Відшукати індекс активного користувача
-			const users = this.state.users;
-			const indexActiveUser = this.state.users.findIndex(user => user.isActive === true);
-			console.log('📕📕 індекс активного користувача', indexActiveUser)
-			users[indexActiveUser].indicesSelectedModels =  this.state.indicesSelectedModels 
+
+//!============================= так не буде працювати оновлення state ========================
+			// const users = this.state.users;
+			// const indexActiveUser = this.state.users.findIndex(user => user.isActive === true);
+			// console.log('📕📕 індекс активного користувача', indexActiveUser)
+			// users[indexActiveUser].indicesSelectedModels =  this.state.indicesSelectedModels 
+//!============================= так не буде працювати оновлення state ========================
+
+			const users = prevState.users.map(
+				(user, index) => 
+					index === this.state.activeUserId
+					? activeUser
+					: user
+			)
 			console.log('📕📕📕 Змінені users', users)
 
 			this.setState({
@@ -197,7 +215,7 @@ export class App extends Component {
 			})
 		}
 
-		//todo: users
+//todo: users
 		console.log("✅ prevState.users", prevState.users)
 		console.log("✅ this.state.users", this.state.users)
 		console.log("✅ prevState.users", prevState.activeUser)
