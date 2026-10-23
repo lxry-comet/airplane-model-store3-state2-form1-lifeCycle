@@ -27,7 +27,7 @@ import debounce from 'lodash.debounce'
 
 import { ModalRegistrationIdentification } from '@/components/ModalRegistrationIdentification/ModalRegistrationIdentification.jsx'
 
-import {FormChoiceRegistrationOrIdentification} from '@/components/FormChoiceRegistrationOrIdentification/FormChoiceRegistrationOrIdentification.jsx'
+import { FormChoiceRegistrationOrIdentification } from '@/components/FormChoiceRegistrationOrIdentification/FormChoiceRegistrationOrIdentification.jsx'
 import { FormRegistration } from '@/components/FormRegistration/FormRegistration.jsx'
 import { FormIdentification } from '@/components/FormIdentification/FormIdentification.jsx'
 
@@ -126,10 +126,10 @@ export class App extends Component {
 		// 		"userPassword": "u1",
 		// 		"userExperience": "",
 		// 		"userAge": "",}, 
-		
+
 		users: JSON.parse(localStorage.getItem("users")) || [],
 		activeUser: null,
-    activeUserId: null, //! #️⃣🗣 індекс Активного (авторизованого) користувача
+		activeUserId: null, //! #️⃣🗣 індекс Активного (авторизованого) користувача
 		modalType: "",  //! 🧾 індикатор типу модального вікна
 	}
 
@@ -147,21 +147,21 @@ export class App extends Component {
 
 		//* Ініціалізація users
 		const initialUsers = localStorage.getItem('users')
-		
+
 		if (!initialUsers) {
 			localStorage.setItem('users', JSON.stringify([]))
 		}
 		const users = JSON.parse(initialUsers)
-		console.log("componentDidMount🗣_❗️users:", users); 
+		console.log("componentDidMount🗣_❗️users:", users)
 
 		//! Шукаємо активного користувача
 		const activeUser = users.find(user => user.isActive === true)
-		console.log("componentDidMount🗣_❗️❗️❗️Активний(авторизований) користувач:", activeUser); 
-		
+		console.log("componentDidMount🗣_❗️❗️❗️Активний(авторизований) користувач:", activeUser)
+
 		//! Беремо users, шукаємо індекс елемента в якому властивість isActive має значення true 
 		const activeUserId = users.findIndex(user => user.isActive === true)
-		
-		if(activeUser){
+
+		if (activeUser) {
 			this.setState({
 				activeUser,
 				activeUserId,
@@ -174,38 +174,38 @@ export class App extends Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		console.log('Спрацював componentDidUpdate')
-//todo: indicesSelectedModels
+		//todo: indicesSelectedModels
 		if (this.state.activeUser && prevState.indicesSelectedModels !== this.state.indicesSelectedModels) {
-      console.log("✅🖍 Перезаписуємо localStorage 'indicesSelectedModels_componentDidUpdate");
+			console.log("✅🖍 Перезаписуємо localStorage 'indicesSelectedModels_componentDidUpdate")
 			localStorage.setItem(
 				'indicesSelectedModels',
 				JSON.stringify(this.state.indicesSelectedModels)
 			)
-//!============================= так не буде працювати оновлення state ========================
+			//!============================= так не буде працювати оновлення state ========================
 			// const activeUser = this.state.activeUser
 			// activeUser.indicesSelectedModels = this.state.indicesSelectedModels 
 			// this.state.activeUser = {user:1};
-//!============================= так не буде працювати оновлення state ========================
+			//!============================= так не буде працювати оновлення state ========================
 
-			
-			const activeUser = {... this.state.activeUser, indicesSelectedModels: this.state.indicesSelectedModels}
+
+			const activeUser = { ... this.state.activeUser, indicesSelectedModels: this.state.indicesSelectedModels }
 			console.log('📕 activeUser', this.state.activeUser)
 
 
 			//! Відшукати індекс активного користувача
 
-//!============================= так не буде працювати оновлення state ========================
+			//!============================= так не буде працювати оновлення state ========================
 			// const users = this.state.users;
 			// const indexActiveUser = this.state.users.findIndex(user => user.isActive === true);
 			// console.log('📕📕 індекс активного користувача', indexActiveUser)
 			// users[indexActiveUser].indicesSelectedModels =  this.state.indicesSelectedModels 
-//!============================= так не буде працювати оновлення state ========================
+			//!============================= так не буде працювати оновлення state ========================
 
 			const users = prevState.users.map(
-				(user, index) => 
+				(user, index) =>
 					index === this.state.activeUserId
-					? activeUser
-					: user
+						? activeUser
+						: user
 			)
 			console.log('📕📕📕 Змінені users', users)
 
@@ -215,17 +215,17 @@ export class App extends Component {
 			})
 		}
 
-//todo: users
+		//todo: users
 		console.log("✅ prevState.users", prevState.users)
 		console.log("✅ this.state.users", this.state.users)
 		console.log("✅ prevState.users", prevState.activeUser)
 		console.log("✅ this.state.users", this.state.activeUser)
 
-    if (prevState.users !== this.state.users) {
-      console.log("✅🖍✅🖍 Перезаписуємо localStorage 'users_componentDidUpdate");
+		if (prevState.users !== this.state.users) {
+			console.log("✅🖍✅🖍 Перезаписуємо localStorage 'users_componentDidUpdate")
 
-      localStorage.setItem("users", JSON.stringify(this.state.users));
-    };
+			localStorage.setItem("users", JSON.stringify(this.state.users))
+		};
 	}
 
 	allFiltration = () => {
@@ -549,21 +549,21 @@ export class App extends Component {
 
 	toggleModal = (event) => { //? з деструктурізацією
 		console.log("🌀toggleModal:", event)
-		const modalType = event ? event.currentTarget.textContent : undefined   
+		const modalType = event ? event.currentTarget.textContent : undefined
 		console.log("modalType:", modalType)
 		// this.setState(({ showModal }) => ({
 		// 	showModal: !showModal,
 		// 	modalType
 		// }))
 		modalType === 'Registration' || modalType === 'Login'
-		? this.setState(({ showModal }) => ({
-			showModal: true,
-			modalType
-		}))
-		: this.setState(({ showModal }) => ({
-			showModal: !showModal,
-			modalType
-		}))
+			? this.setState(({ showModal }) => ({
+				showModal: true,
+				modalType
+			}))
+			: this.setState(({ showModal }) => ({
+				showModal: !showModal,
+				modalType
+			}))
 	};
 
 	//! Приймаємо об'ект з даних користувача з форми Реєстрації
@@ -574,22 +574,25 @@ export class App extends Component {
 		//* [1] Стягнути в змінну usersDb базу даних localStorage
 		//* [2] Додаємо користувача user до usersDb і кладемо цей результат в нову змінну newUsers
 		//* [3] Перезаписуємо поле users в LocalStorage новими данними з newUsers
-		const usersDb =  JSON.parse(localStorage.getItem("users"))
+		const usersDb = JSON.parse(localStorage.getItem("users"))
 		console.log('usersDb: ', usersDb)
-		const newUsers =  [...usersDb, user]
+		const newUsers = [...usersDb, user]
 		localStorage.setItem("users", JSON.stringify(newUsers))
-		this.setState({ users: newUsers, modalType: 'Login'});
+		this.setState({ users: newUsers, modalType: 'Login' })
+
 		// this.setState((prevState) => {	
 		// 	return {
 		// 		users: [...prevState.users, user]
 		// 	}
 		// })
+
+		this.windowSrollTo()
 	}
 
 	//! Вхід в обліковий запис
 	accountLogin = (userEmail) => {
 		console.log("🙆‍♂️Вхід в обліковий запис: ", userEmail)
-		
+
 		//! Необхідні дії:
 		//* [1] - Отримати в змінну users масив користувачів в localStorage
 		//* [2] - Серед масиву users треба знайти користувача за email який дорівнює userEmail.
@@ -599,36 +602,37 @@ export class App extends Component {
 		//* [5] - Треба передати інформацію про activeUsers до localStorage і state
 		//* [6] - Додаємо в localStprage indecesSelectedModels з activeUser
 		//! [1]
-			const users = JSON.parse(localStorage.getItem("users"))
-			console.log("users ДО: ",users)
+		const users = JSON.parse(localStorage.getItem("users"))
+		console.log("users ДО: ", users)
 		//![2]
-			const activeUser = users.find(user => user.userEmail === userEmail)
-			console.log("activeUser: ",activeUser)
+		const activeUser = users.find(user => user.userEmail === userEmail)
+		console.log("activeUser: ", activeUser)
 		//![3]
-			activeUser.isActive = true
-			console.log("users ПІСЛЯ: ",users)
+		activeUser.isActive = true
+		console.log("users ПІСЛЯ: ", users)
 		//![4]
-			const activeUserId = users.findIndex(user => user.userEmail === userEmail)
-			console.log("activeUserId: ",activeUserId)
+		const activeUserId = users.findIndex(user => user.userEmail === userEmail)
+		console.log("activeUserId: ", activeUserId)
 		//![5]
-			localStorage.setItem("users", JSON.stringify(users))
-			//![6] - створюємо indicesSelectedModels з activeUser
-			const indicesSelectedModels = activeUser.indicesSelectedModels;
-			this.setState({
-				users,
-				activeUser,
-				activeUserId,
-				indicesSelectedModels
-			})
+		localStorage.setItem("users", JSON.stringify(users))
+		//![6] - створюємо indicesSelectedModels з activeUser
+		const indicesSelectedModels = activeUser.indicesSelectedModels
+		this.setState({
+			users,
+			activeUser,
+			activeUserId,
+			indicesSelectedModels
+		})
 		//![7]
 		localStorage.setItem("indicesSelectedModels", JSON.stringify(indicesSelectedModels))
+		this.windowSrollTo()
 	}
 
 
 	//! Завершення сеансу облікового запису
-	
-  signOut = () => {
-    console.log("⬇️Sign Out");
+
+	signOut = () => {
+		console.log("⬇️Sign Out")
 		//* [1] - Отримати в змінну users масив користувачів в localStorage
 		const users = JSON.parse(localStorage.getItem("users"))
 
@@ -639,16 +643,28 @@ export class App extends Component {
 		//* [4] - В localStorage перезаписати users
 		localStorage.setItem("users", JSON.stringify(users))
 		//* [5] - В localStorage видалити властивість indecesSelectedModels
-		localStorage.removeItem("indicesSelectedModels"); //! видаляємо масив індексів обраних моделей активного (авторизованого) користувача
+		localStorage.removeItem("indicesSelectedModels") //! видаляємо масив індексів обраних моделей активного (авторизованого) користувача
 		//* [6] - Змінити  властивості в state які і відповіають за роботу з users
 		this.setState({
 			users,
-			activeUser:null,
-			activeUserId:null,
+			activeUser: null,
+			activeUserId: null,
 			indicesSelectedModels: [],
 			showModal: true //✅
 		})
+		this.windowSrollTo()
 	}
+
+
+	
+	//! Прокрутити сторінку вгору
+	windowSrollTo = () => {
+		window.scrollTo({
+			top: 0,
+			left: 0,
+			behavior: "smooth",
+		})
+	};
 
 
 	render() {
@@ -744,10 +760,10 @@ export class App extends Component {
 		console.log("🌀 Контроль відкриття/закриття модального вікна:", showModal)
 
 		console.log("👨‍👩‍👦‍👦 Масив з даними користувачів:", users)
-		console.log("🗣 Активний (авторизований) користувач:", activeUser);
-    console.log("#️⃣🗣 Індекс Активного(авторизованого) користувача", activeUserId);
+		console.log("🗣 Активний (авторизований) користувач:", activeUser)
+		console.log("#️⃣🗣 Індекс Активного(авторизованого) користувача", activeUserId)
 
-		console.log("🧾 Індикатор типу модального вікна:", modalType);
+		console.log("🧾 Індикатор типу модального вікна:", modalType)
 		console.log("=========================================================")
 		return (
 			<>
@@ -756,29 +772,29 @@ export class App extends Component {
 				{showModal && (
 					<ModalRegistrationIdentification onClose={this.toggleModal}>
 						{/*//!  Екран вибору Реєстрації або Ідентифікації/Аутентифікації (Login) користувача */}
-						
-						{!modalType && 
-							<FormChoiceRegistrationOrIdentification 
+
+						{!modalType &&
+							<FormChoiceRegistrationOrIdentification
 								onClose={this.toggleModal}
 							/>
 						}
 						{/*//!  Форма Реєстрації користувача */}
-						{modalType === "Registration" && 
-							<FormRegistration 
+						{modalType === "Registration" &&
+							<FormRegistration
 								onSubmit={this.submitForm}
 								onClose={this.toggleModal}
-								// users={users}
-							/> 
+							// users={users}
+							/>
 						}
 
 						{/*//!  Форма Ідентифікації/Аутентифікації (Login) користувача */}
 
-						{ modalType === "Login" && 
-							<FormIdentification 
+						{modalType === "Login" &&
+							<FormIdentification
 								onAccountLogin={this.accountLogin}
 								onClose={this.toggleModal}
-								// users={users}
-							/>	 
+							// users={users}
+							/>
 						}
 					</ModalRegistrationIdentification>
 
