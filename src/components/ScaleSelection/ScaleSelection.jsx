@@ -4,9 +4,14 @@ import css from './ScaleSelection.module.css'
 export class ScaleSelection extends Component {
 	
 	state = {
-		modalScale: "all"
+		// modalScale: "all",
+		modalScale: this.props.onInitialScale,
 	}
-
+	componentDidUpdate(prevProps, prevState){
+		console.log('⚠️Спрацював componentDidUpdate - ScaleSelection')
+		console.log('⚠️Спрацював prevState.modalScale', prevState.modalScale)
+		console.log('⚠️Спрацював this.state.modalScale', this.state.modalScale)
+	}
 	handleChangeModelScale = event => {
 		const {aircrafts} = this.props
 		console.log("⚠️ aircrafts",aircrafts)

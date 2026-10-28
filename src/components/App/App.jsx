@@ -94,6 +94,7 @@ export class App extends Component {
 		//! Властивості для кристувачів
 		showModal: true, //! контроль відкриття/закриття модального вікна
 
+		modelScale: "all",
 		//! масив з даними користувачів
 		// users: [
 		// 	{
@@ -585,8 +586,9 @@ export class App extends Component {
 		// 		users: [...prevState.users, user]
 		// 	}
 		// })
-
-		this.windowSrollTo()
+		this.initialState();
+		this.windowSrollTo();
+		
 	}
 
 	//! Вхід в обліковий запис
@@ -625,7 +627,8 @@ export class App extends Component {
 		})
 		//![7]
 		localStorage.setItem("indicesSelectedModels", JSON.stringify(indicesSelectedModels))
-		this.windowSrollTo()
+		this.initialState();
+		this.windowSrollTo();
 	}
 
 
@@ -652,9 +655,23 @@ export class App extends Component {
 			indicesSelectedModels: [],
 			showModal: true //✅
 		})
-		this.windowSrollTo()
+		this.initialState();
+		this.windowSrollTo();
 	}
-
+//! скидання застосунку в початковий стан
+  initialState = () => {
+	  this.setState({
+			aircraftsArray: aircrafts,
+		  aircraftTitle: 'Магазин моделей літаків та вертольотів',
+			activeButton: 'allButton',
+			bgColor: 'white',
+			inputSearchValue: '',
+			radioButtonValue: 'brief',
+			aircraftsArrAfterFiltration: aircrafts,
+			modelsSelectedScale: aircrafts, 
+			modelScale: "all"
+		})
+  }
 
 	
 	//! Прокрутити сторінку вгору
@@ -665,7 +682,6 @@ export class App extends Component {
 			behavior: "smooth",
 		})
 	};
-
 
 	render() {
 		//! [1] Блок диструктуризації props та state
@@ -681,6 +697,7 @@ export class App extends Component {
 			radioButtonValue,
 			modelsSelectedScale,
 			showModal,
+			modelScale,
 			users,
 			activeUser,
 			activeUserId,
@@ -756,7 +773,8 @@ export class App extends Component {
 		console.log('radioButtonValue (✅Sort): ', radioButtonValue)
 
 		console.log("🔸🔸🔸modelsSelectedScale: ", modelsSelectedScale)
-
+		
+		console.log("Початковий масштаб моделі в ScaleSelection:", modelScale);
 		console.log("🌀 Контроль відкриття/закриття модального вікна:", showModal)
 
 		console.log("👨‍👩‍👦‍👦 Масив з даними користувачів:", users)
@@ -811,6 +829,7 @@ export class App extends Component {
 					aircrafts={aircrafts}
 					onGetModelsSelectedScale={this.getModelsSelectedScale}
 					isCartButtonOn={activeButton}
+					onInitialScale={modelScale}
 				/>
 				<Filter
 					onAll={this.allFiltration}
