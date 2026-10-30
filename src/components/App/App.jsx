@@ -498,7 +498,6 @@ export class App extends Component {
 		// })
 		//! Аналізувати натиснуту кнопку фільтрів.  
 
-
 		console.log("🌐 Кнопка фільтра: ", this.state.activeButton)
 		//! В залежості від значення this.state.activeButton, створюємо 4 різних зеачення aircraftsArray Ta aircraftsArrayAfterFiltration
 		let result = [] //? масив
@@ -521,7 +520,7 @@ export class App extends Component {
 		this.setState({
 			modelsSelectedScale: modelsScale,
 			aircraftsArray: result,
-			aircraftsArrAfterFiltration: result
+			aircraftsArrAfterFiltration: result,
 		})
 	}
 	// escapeRegExp = str => {
