@@ -489,7 +489,7 @@ export class App extends Component {
 			aircraftsArray: this.state.aircraftsArrAfterFiltration
 		})
 	}
-	getModelsSelectedScale = modelsScale => {
+	getModelsSelectedScale = (modelsScale, value) => {
 		console.log("📗Масив моделей обраного масштабу :", modelsScale)
 		// this.setState({
 		// 	modelsSelectedScale: modelsScale,
@@ -521,6 +521,7 @@ export class App extends Component {
 			modelsSelectedScale: modelsScale,
 			aircraftsArray: result,
 			aircraftsArrAfterFiltration: result,
+			modelScale: value
 		})
 	}
 	// escapeRegExp = str => {

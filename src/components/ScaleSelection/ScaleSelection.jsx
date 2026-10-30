@@ -4,14 +4,23 @@ import css from './ScaleSelection.module.css'
 export class ScaleSelection extends Component {
 	
 	state = {
-		// modalScale: "all",
-		modalScale: this.props.onInitialScale,
+		// modelScale: "all",
+		modelScale: this.props.onInitialScale,
 	}
 	componentDidUpdate(prevProps, prevState){
 		console.log('⚠️Спрацював componentDidUpdate - ScaleSelection')
-		console.log('⚠️Спрацював prevState.modalScale', prevState.modalScale)
-		console.log('⚠️Спрацював this.state.modalScale', this.state.modalScale)
+		console.log('⚠️Спрацював prevState.modelScale', prevState.modelScale)
+		console.log('⚠️Спрацював this.state.modelScale', this.state.modelScale)
+		console.log('⚠️Спрацював prevProps.onInitialScale', prevProps.onInitialScale)
+		console.log('⚠️Спрацював this.props.onInitialScale', this.props.onInitialScale)
+		
+		if(prevProps.onInitialScale !== this.props.onInitialScale ){
+			this.setState({
+				modelScale: this.props.onInitialScale
+			})
+		}
 	}
+	
 	handleChangeModelScale = event => {
 		const {aircrafts} = this.props
 		console.log("⚠️ aircrafts",aircrafts)
@@ -31,19 +40,19 @@ export class ScaleSelection extends Component {
 		: aircrafts.filter(aircraft =>
 			aircraft.model.scale.some(item => item === Number(value)))
 		// console.log("🔸modelsSelectedScale: ", modelsSelectedScale)
-		this.props.onGetModelsSelectedScale(modelsSelectedScale)
+		this.props.onGetModelsSelectedScale(modelsSelectedScale, value)
 	}
 
 	render() {
 		const {isCartButtonOn} = this.props
-		const {modalScale } = this.state
+		const {modelScale } = this.state
 		console.log("⚠️ Number All", Number("All"))
 
 		console.log('----------------------------------------------')
 		// console.log('✅Sort: ', sort)
 		// console.log('🎯inputSearchPlaceholder: ', inputSearchPlaceholder)
 		// console.log("✅radioButtonValue:", radioButtonValueApp)
-		console.log("✅Зміна масштабу моделі", modalScale)
+		console.log("✅Зміна масштабу моделі", modelScale)
 		console.log('______________________________________________')
 
 		return (
@@ -53,8 +62,8 @@ export class ScaleSelection extends Component {
               {/* масштаб моделі */}
               <select
                 className={css.scaleSelectionSelect}
-                name="modalScale"
-                value={modalScale}
+                name="modelScale"
+                value={modelScale}
                 onChange={this.handleChangeModelScale}
                 disabled={isCartButtonOn === 'cartButton'} //! блокування, якщо активна кнопка «Кошик»
               >
