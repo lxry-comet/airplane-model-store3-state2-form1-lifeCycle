@@ -475,8 +475,13 @@ export class App extends Component {
 		}
 		console.log('☺️result: ', result)
 		this.setState({
-			aircraftsArray: result
-			// indicesSelectedModels:
+			aircraftsArray: result,
+			//! selectedModels: result ?
+			//todo: Var [1]
+			//? indicesSelectedModels:  result.map(item => item.id)
+
+			//todo: Var [2]
+			
 		})
 	}
 	getRadioButtonValue = value => {
@@ -728,10 +733,20 @@ export class App extends Component {
 			.reduce((previousValue, number) => {
 				return previousValue + number
 			}, 0)
+			
+			//todo: Var [1]
+// * Обчислення масиву обраних моделей
+		// const selectedModels = indicesSelectedModels.flatMap(id =>
+		// 	aircrafts.filter(element => element.id === id)
+		// )
 
-		const selectedModels = indicesSelectedModels.flatMap(id =>
-			aircrafts.filter(element => element.id === id)
-		)
+		//todo: Var [2]
+		// коли активна кнопка кошик, то selectedModels = result
+		// інакше selectedModels = indicesSelectedModels.flatMap(id =>aircrafts.filter(element => element.id === id)
+		const selectedModels = 
+			activeButton === 'cartButton'
+			? aircraftsArray
+			: indicesSelectedModels.flatMap(id =>aircrafts.filter(element => element.id === id))
 
 		const totalModels = selectedModels
 			.map(
