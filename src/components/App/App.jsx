@@ -10,26 +10,23 @@ import aircrafts from '@/json/aircrafts.json'
 // import planes from '@/json/planes.json'
 // import helicopters from '@/json/helicopters.json'
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 
 // import PlanesList from '../PlanesList/PlanesList.jsx'
 import { Filter } from '@/components/Filter/Filter.jsx'
 import PlanesList from '@/components/PlanesList/PlanesList.jsx'
 // import Section from '../Section/Section.jsx'
+import { RegistrationIdentification } from "@/components/RegistrationIdentification/RegistrationIdentification.jsx"
+import { ScaleSelection } from '@/components/ScaleSelection/ScaleSelection.jsx'
 import Section from '@/components/Section/Section.jsx'
 import { Sorter } from '@/components/Sorter/Sorter.jsx'
-import { ScaleSelection } from '@/components/ScaleSelection/ScaleSelection.jsx'
-import css from './App.module.css'
-import { id } from 'date-fns/locale'
-import { CgOpenCollective } from 'react-icons/cg'
-import { RegistrationIdentification } from "@/components/RegistrationIdentification/RegistrationIdentification.jsx"
 import debounce from 'lodash.debounce'
 
 import { ModalRegistrationIdentification } from '@/components/ModalRegistrationIdentification/ModalRegistrationIdentification.jsx'
 
 import { FormChoiceRegistrationOrIdentification } from '@/components/FormChoiceRegistrationOrIdentification/FormChoiceRegistrationOrIdentification.jsx'
-import { FormRegistration } from '@/components/FormRegistration/FormRegistration.jsx'
 import { FormIdentification } from '@/components/FormIdentification/FormIdentification.jsx'
+import { FormRegistration } from '@/components/FormRegistration/FormRegistration.jsx'
 
 
 //! Приклад початкового сортування на ім'я (за полем name.brief)

@@ -13,7 +13,7 @@ export class ScaleSelection extends Component {
 		console.log('⚠️Спрацював this.state.modelScale', this.state.modelScale)
 		console.log('⚠️Спрацював prevProps.onInitialScale', prevProps.onInitialScale)
 		console.log('⚠️Спрацював this.props.onInitialScale', this.props.onInitialScale)
-		
+//! 🔄 Для перерендеру
 		if(prevProps.onInitialScale !== this.props.onInitialScale ){
 			this.setState({
 				modelScale: this.props.onInitialScale
