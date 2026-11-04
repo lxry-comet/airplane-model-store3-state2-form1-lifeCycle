@@ -153,11 +153,21 @@ export class App extends Component {
 		console.log("componentDidMount🗣_❗️users:", users)
 
 		//! Шукаємо активного користувача
-		const activeUser = users.find(user => user.isActive === true)
+		const activeUser = 
+		users
+		? 
+		users.find(user => user.isActive === true)
+		:
+		null
 		console.log("componentDidMount🗣_❗️❗️❗️Активний(авторизований) користувач:", activeUser)
 
 		//! Беремо users, шукаємо індекс елемента в якому властивість isActive має значення true 
-		const activeUserId = users.findIndex(user => user.isActive === true)
+		const activeUserId = 
+		users
+		?
+		users.findIndex(user => user.isActive === true)
+		:
+		null
 
 		if (activeUser) {
 			this.setState({
